@@ -4,201 +4,167 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proliance Daily Coach</title>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#faf6f1;--bg2:#f0ebe3;--surface:#fff;--border:#e0d8cd;--border-light:#ebe5db;--text:#2c2825;--text-dim:#9a938a;--text-mid:#6b645b;--fire:#e84830;--fire-light:#e8483018;--fire-glow:#e8483040;--coral:#f07050;--coral-light:#f0705015;--amber:#f0a030;--amber-light:#f0a03018;--amber-glow:#f0a03040;--gold:#d4a012;--gold-light:#d4a01218;--emerald:#22b573;--emerald-light:#22b57318;--emerald-glow:#22b57340;--sky:#3b9fe8;--sky-light:#3b9fe818;--violet:#8b5cf6;--violet-light:#8b5cf618;--rose:#e84580;--rose-light:#e8458018;--teal:#14b8a6;--teal-light:#14b8a618;--radius:16px;--radius-sm:12px;--shadow:0 2px 8px rgba(44,40,37,.06),0 8px 24px rgba(44,40,37,.04);--shadow-pop:0 4px 16px rgba(44,40,37,.1),0 12px 32px rgba(44,40,37,.06);}
+:root{--bg:#faf7f2;--bg2:#f0ebe3;--surface:#ffffff;--border:#e2dacf;--border-light:#eae4da;--text:#1e1c1a;--text-dim:#97918a;--text-mid:#635d56;--fire:#dc4425;--fire-light:#dc442515;--fire-glow:#dc442535;--coral:#ef6c4f;--coral-light:#ef6c4f12;--amber:#e8a020;--amber-light:#e8a02015;--amber-glow:#e8a02035;--gold:#c89810;--gold-light:#c8981015;--emerald:#1aab68;--emerald-light:#1aab6815;--emerald-glow:#1aab6835;--sky:#2d8fd6;--sky-light:#2d8fd615;--violet:#7c4deb;--violet-light:#7c4deb15;--rose:#d94070;--rose-light:#d9407015;--teal:#0fa898;--teal-light:#0fa89815;--radius:16px;--radius-sm:10px;--shadow:0 1px 3px rgba(30,28,26,.04),0 6px 20px rgba(30,28,26,.03);--shadow-pop:0 4px 16px rgba(30,28,26,.08),0 12px 32px rgba(30,28,26,.04);}
 *{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Sora',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.5;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 10% 0%,#e8483010 0%,transparent 40%),radial-gradient(ellipse at 90% 20%,#f0a03010 0%,transparent 40%),radial-gradient(ellipse at 50% 100%,#22b57308 0%,transparent 40%);pointer-events:none;z-index:0;}
-.app{max-width:1200px;margin:0 auto;padding:24px 20px 130px;position:relative;z-index:1;}
- 
-.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
-.brand h1{font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;background:linear-gradient(135deg,var(--fire),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;}
-.brand .sub{font-size:.68rem;color:var(--text-dim);letter-spacing:.1em;text-transform:uppercase;font-weight:500;margin-top:2px;}
-.hdr-btns{display:flex;gap:8px;flex-wrap:wrap;}
- 
-.card{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);padding:20px;margin-bottom:14px;box-shadow:var(--shadow);animation:rise .4s ease both;}
-.card-hd{font-size:.62rem;text-transform:uppercase;letter-spacing:.14em;color:var(--text-dim);margin-bottom:12px;font-weight:600;display:flex;align-items:center;gap:7px;}
-.card-hd .ic{font-size:.9rem;}
-.card-hd .hd-right{margin-left:auto;font-size:.58rem;font-weight:700;}
-@keyframes rise{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:translateY(0);}}
- 
-input,select,textarea{font-family:inherit;font-size:.8rem;padding:9px 12px;border:1px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;width:100%;}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;line-height:1.55;-webkit-font-smoothing:antialiased;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse at 15% 0%,#dc442508 0%,transparent 50%),radial-gradient(ellipse at 85% 15%,#e8a02008 0%,transparent 50%),radial-gradient(ellipse at 50% 100%,#1aab6806 0%,transparent 50%);pointer-events:none;z-index:0;}
+.app{max-width:1280px;margin:0 auto;padding:20px 24px 120px;position:relative;z-index:1;}
+.header{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
+.brand h1{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:800;background:linear-gradient(135deg,var(--fire) 0%,var(--amber) 50%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;letter-spacing:-.02em;}
+.brand .sub{font-size:.6rem;color:var(--text-dim);letter-spacing:.14em;text-transform:uppercase;font-weight:500;margin-top:1px;}
+.hdr-btns{display:flex;gap:6px;flex-wrap:wrap;}
+.card{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius);padding:18px;margin-bottom:12px;box-shadow:var(--shadow);transition:box-shadow .2s;}
+.card:hover{box-shadow:var(--shadow-pop);}
+.card-hd{font-size:.58rem;text-transform:uppercase;letter-spacing:.13em;color:var(--text-dim);margin-bottom:10px;font-weight:600;display:flex;align-items:center;gap:6px;}
+.card-hd .ic{font-size:.85rem;}
+.card-hd .hd-right{margin-left:auto;font-size:.55rem;font-weight:700;cursor:pointer;transition:color .15s;}
+.card-hd .hd-right:hover{color:var(--fire);}
+input,select,textarea{font-family:'DM Sans',sans-serif;font-size:.78rem;padding:8px 11px;border:1.5px solid var(--border);border-radius:var(--radius-sm);background:var(--bg);color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;width:100%;}
 input:focus,select:focus,textarea:focus{border-color:var(--fire);box-shadow:0 0 0 3px var(--fire-light);}
-input::placeholder,textarea::placeholder{color:var(--text-dim);}
- 
-.btn{font-family:inherit;font-size:.78rem;font-weight:600;padding:9px 18px;border:none;border-radius:var(--radius-sm);cursor:pointer;transition:all .15s;letter-spacing:.02em;}
-.btn:hover{filter:brightness(1.05);transform:translateY(-1px);}.btn:active{transform:translateY(0);}
-.btn-fire{background:linear-gradient(135deg,var(--fire),var(--coral));color:#fff;box-shadow:0 3px 10px var(--fire-glow);}
-.btn-green{background:linear-gradient(135deg,var(--emerald),var(--teal));color:#fff;box-shadow:0 3px 10px var(--emerald-glow);}
-.btn-amber{background:linear-gradient(135deg,var(--amber),var(--gold));color:#fff;box-shadow:0 3px 10px var(--amber-glow);}
-.btn-ghost{background:transparent;border:1px solid var(--border);color:var(--text-mid);}
-.btn-ghost:hover{border-color:var(--fire);color:var(--fire);}
-.btn-sm{padding:5px 12px;font-size:.7rem;}
+input::placeholder,textarea::placeholder{color:var(--text-dim);font-weight:400;}
+textarea{resize:vertical;min-height:40px;}
+.btn{font-family:'DM Sans',sans-serif;font-size:.72rem;font-weight:600;padding:8px 16px;border:none;border-radius:var(--radius-sm);cursor:pointer;transition:all .2s;letter-spacing:.01em;}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px);box-shadow:0 4px 12px rgba(0,0,0,.1);}.btn:active{transform:translateY(0);}
+.btn-fire{background:linear-gradient(135deg,var(--fire),var(--coral));color:#fff;box-shadow:0 2px 10px var(--fire-glow);}
+.btn-green{background:linear-gradient(135deg,var(--emerald),var(--teal));color:#fff;box-shadow:0 2px 10px var(--emerald-glow);}
+.btn-amber{background:linear-gradient(135deg,var(--amber),var(--gold));color:#fff;box-shadow:0 2px 10px var(--amber-glow);}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--text-mid);}
+.btn-ghost:hover{border-color:var(--fire);color:var(--fire);background:var(--fire-light);}
+.btn-sm{padding:5px 11px;font-size:.67rem;}
 .btn-full{width:100%;}
 .btn-danger{background:var(--fire);color:#fff;}
- 
-/* STATS ROW */
-.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:20px;}
-.stat{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:14px;box-shadow:var(--shadow);text-align:center;position:relative;overflow:hidden;}
-.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;}
-.stat-num{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:700;line-height:1;}
-.stat-lbl{font-size:.55rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-top:3px;font-weight:600;}
-.stat-nudge{font-size:.55rem;color:var(--amber);font-weight:600;margin-top:2px;}
- 
-/* NAV */
-.nav-tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--surface);border:1px solid var(--border-light);border-radius:30px;padding:4px;box-shadow:var(--shadow);flex-wrap:wrap;}
-.nav-tab{padding:8px 16px;border-radius:24px;font-size:.72rem;font-weight:600;cursor:pointer;border:none;font-family:inherit;background:transparent;color:var(--text-dim);transition:all .2s;}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:14px;}
+.stat{background:var(--surface);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:12px 10px;box-shadow:var(--shadow);text-align:center;position:relative;overflow:hidden;transition:transform .15s;}
+.stat:hover{transform:translateY(-2px);}
+.stat::after{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--fire),var(--amber));opacity:.3;}
+.stat-num{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;line-height:1;}
+.stat-lbl{font-size:.48rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);margin-top:3px;font-weight:600;}
+.nav-tabs{display:flex;gap:3px;margin-bottom:14px;background:var(--surface);border:1px solid var(--border-light);border-radius:28px;padding:4px;box-shadow:var(--shadow);flex-wrap:wrap;}
+.nav-tab{padding:7px 15px;border-radius:22px;font-size:.68rem;font-weight:600;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;background:transparent;color:var(--text-dim);transition:all .2s;}
 .nav-tab.on{background:linear-gradient(135deg,var(--fire),var(--coral));color:#fff;box-shadow:0 2px 8px var(--fire-glow);}
 .nav-tab:hover:not(.on){color:var(--text);background:var(--bg2);}
- 
-.layout{display:grid;grid-template-columns:1fr 360px;gap:18px;align-items:start;}
-@media(max-width:900px){.layout{grid-template-columns:1fr;}}
- 
-/* LOCK-IN */
-.lockin-prompt{text-align:center;padding:28px 16px;}
-.lockin-prompt h2{font-family:'Playfair Display',serif;font-size:1.6rem;background:linear-gradient(135deg,var(--fire),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;}
-.lockin-prompt p{color:var(--text-dim);font-size:.85rem;margin-bottom:22px;}
-.goal-inputs{display:flex;flex-direction:column;gap:10px;max-width:500px;margin:0 auto;}
-.goal-input-row{display:flex;align-items:center;gap:10px;}
-.goal-num{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--fire),var(--amber));color:#fff;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;box-shadow:0 2px 8px var(--fire-glow);}
- 
-/* GOALS */
-.goal-item{display:flex;align-items:center;gap:12px;padding:16px;margin-bottom:8px;border-radius:var(--radius-sm);background:var(--bg);border:2px solid var(--border-light);transition:all .3s;position:relative;overflow:hidden;}
-.goal-item:hover{border-color:var(--amber);}
-.goal-item.completed{background:linear-gradient(135deg,var(--emerald-light),#e8faf0);border-color:var(--emerald);}
+.main-layout{display:grid;grid-template-columns:1fr 320px;gap:14px;align-items:start;}
+@media(max-width:900px){.main-layout{grid-template-columns:1fr;}}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:700px){.two-col{grid-template-columns:1fr;}}
+.lockin-prompt{text-align:center;padding:28px 20px;}
+.lockin-prompt h2{font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:800;background:linear-gradient(135deg,var(--fire),var(--amber),var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:6px;letter-spacing:-.01em;}
+.lockin-prompt p{color:var(--text-dim);font-size:.82rem;margin-bottom:20px;}
+.goal-inputs{display:flex;flex-direction:column;gap:8px;max-width:480px;margin:0 auto;}
+.goal-input-row{display:flex;align-items:center;gap:8px;}
+.goal-num{width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,var(--fire),var(--amber));color:#fff;display:flex;align-items:center;justify-content:center;font-size:.68rem;font-weight:700;flex-shrink:0;box-shadow:0 2px 6px var(--fire-glow);}
+.goal-item{display:flex;align-items:center;gap:10px;padding:10px 14px;margin-bottom:6px;border-radius:var(--radius-sm);background:var(--bg);border:2px solid var(--border-light);transition:all .2s;position:relative;overflow:hidden;cursor:pointer;}
+.goal-item:hover{border-color:var(--amber);background:var(--amber-light);}
+.goal-item.completed{background:linear-gradient(135deg,var(--emerald-light),#eafbf2);border-color:var(--emerald);}
 .goal-item.completed h3{text-decoration:line-through;color:var(--text-dim);}
-.goal-check{width:30px;height:30px;border:3px solid var(--border);border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0;}
-.goal-check:hover{border-color:var(--emerald);transform:scale(1.15);}
-.goal-check.done{background:linear-gradient(135deg,var(--emerald),var(--teal));border-color:var(--emerald);animation:pop .4s ease;box-shadow:0 2px 10px var(--emerald-glow);}
-.goal-check.done::after{content:'✓';color:#fff;font-size:.9rem;font-weight:800;}
-@keyframes pop{0%{transform:scale(1);}40%{transform:scale(1.3);}100%{transform:scale(1);}}
-.goal-item h3{font-size:.9rem;font-weight:500;flex:1;}
+.goal-check{width:24px;height:24px;border:2.5px solid var(--border);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+.goal-check.done{background:linear-gradient(135deg,var(--emerald),var(--teal));border-color:var(--emerald);box-shadow:0 2px 8px var(--emerald-glow);}
+.goal-check.done::after{content:'✓';color:#fff;font-size:.72rem;font-weight:800;}
+.goal-item h3{font-size:.8rem;font-weight:500;flex:1;}
 .confetti-burst{position:absolute;top:50%;left:20%;pointer-events:none;z-index:10;}
 .confetti-piece{position:absolute;border-radius:2px;animation:cFly .8s ease-out forwards;opacity:0;}
-@keyframes cFly{0%{opacity:1;transform:translate(0,0) rotate(0deg) scale(1);}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--rot)) scale(0);}}
-.progress-ring{margin:10px auto;display:block;}
- 
-/* NOTEPAD */
-.notepad-item{display:flex;align-items:center;gap:8px;padding:9px 10px;border-bottom:1px solid var(--border-light);font-size:.8rem;animation:rise .25s ease both;}
+@keyframes cFly{0%{opacity:1;transform:translate(0,0) rotate(0) scale(1);}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--rot)) scale(0);}}
+.notepad-item{display:flex;align-items:center;gap:6px;padding:7px 8px;border-bottom:1px solid var(--border-light);font-size:.76rem;}
 .notepad-item:last-child{border-bottom:none;}
-.np-check{width:18px;height:18px;border:2px solid var(--border);border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
-.np-check:hover{border-color:var(--emerald);}
+.np-check{width:16px;height:16px;border:2px solid var(--border);border-radius:4px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
 .np-check.done{background:var(--emerald);border-color:var(--emerald);}
-.np-check.done::after{content:'✓';color:#fff;font-size:.6rem;font-weight:700;}
+.np-check.done::after{content:'✓';color:#fff;font-size:.55rem;font-weight:700;}
 .np-text{flex:1;}.np-text.struck{text-decoration:line-through;color:var(--text-dim);}
-.np-cat{font-size:.55rem;padding:2px 6px;border-radius:8px;font-weight:600;}
-.np-del{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.75rem;padding:2px;border-radius:4px;transition:all .15s;}
+.np-del{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.7rem;padding:2px;}
 .np-del:hover{color:var(--fire);}
-.np-add{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;}
-.np-add input{flex:1;min-width:120px;}.np-add select{width:auto;min-width:100px;}
- 
-/* Tag colors — dynamic via JS */
-.tag-color{font-size:.55rem;padding:2px 6px;border-radius:8px;font-weight:600;}
- 
-/* METRICS */
-.metrics-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;}
-.metric-input{display:flex;align-items:center;gap:6px;background:var(--bg);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:8px 12px;flex:1;min-width:140px;}
-.metric-input label{font-size:.65rem;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.08em;white-space:nowrap;}
-.metric-input input{width:60px;text-align:center;padding:4px 6px;font-size:.9rem;font-weight:700;border:1px solid var(--border);border-radius:6px;}
- 
-/* WINS */
-.win-item{background:linear-gradient(135deg,var(--gold-light),var(--amber-light));border:1px solid var(--amber);border-radius:var(--radius-sm);padding:14px;margin-bottom:8px;position:relative;overflow:hidden;animation:rise .3s ease both;}
-.win-item::before{content:'🏆';position:absolute;top:6px;right:10px;font-size:1.2rem;opacity:.2;}
-.win-title{font-size:.85rem;font-weight:600;margin-bottom:4px;}
-.win-meta{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:4px;}
-.win-time{font-size:.55rem;color:var(--text-dim);}
-.win-steps{margin-top:6px;}
-.win-step{display:flex;align-items:flex-start;gap:7px;padding:2px 0;font-size:.72rem;color:var(--text-mid);}
-.win-step-num{width:16px;height:16px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.5rem;font-weight:800;flex-shrink:0;margin-top:1px;}
-.win-del{position:absolute;top:6px;right:34px;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.65rem;}
-.win-del:hover{color:var(--fire);}
- 
-/* PIPELINE */
-.pipeline-card{background:var(--bg);border-radius:var(--radius-sm);padding:14px;margin-bottom:10px;border:1px solid var(--border-light);animation:rise .3s ease both;}
-.pipeline-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;cursor:pointer;}
-.pipeline-header h4{font-size:.85rem;font-weight:600;display:flex;align-items:center;gap:6px;}
-.pip-arrow{transition:transform .2s;font-size:.7rem;color:var(--text-dim);}
+.np-add{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap;}
+.np-add input{flex:1;min-width:100px;}.np-add select{width:auto;min-width:90px;}
+.tag-color{font-size:.5rem;padding:2px 5px;border-radius:6px;font-weight:600;}
+.tag-pill{display:flex;align-items:center;gap:3px;padding:3px 7px;border-radius:10px;font-size:.55rem;font-weight:600;}
+.tag-pill .tag-x{cursor:pointer;font-size:.65rem;opacity:.5;margin-left:2px;}.tag-pill .tag-x:hover{opacity:1;}
+.tag-manager{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:6px;}
+.metrics-row{display:flex;gap:6px;flex-wrap:wrap;}
+.metric-input{display:flex;align-items:center;gap:5px;background:var(--bg);border:1px solid var(--border-light);border-radius:var(--radius-sm);padding:6px 10px;flex:1;min-width:120px;}
+.metric-input label{font-size:.58rem;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
+.metric-input input{width:50px;text-align:center;padding:3px 4px;font-size:.85rem;font-weight:700;border:1px solid var(--border);border-radius:5px;}
+.pipeline-card{background:var(--bg);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;border:1px solid var(--border-light);}
+.pipeline-header{display:flex;align-items:center;justify-content:space-between;cursor:pointer;gap:6px;}
+.pipeline-header h4{font-size:.78rem;font-weight:600;display:flex;align-items:center;gap:5px;flex-wrap:wrap;}
+.pip-arrow{transition:transform .2s;font-size:.65rem;color:var(--text-dim);}
 .pip-arrow.open{transform:rotate(90deg);}
-.pipeline-progress{display:flex;gap:3px;margin-bottom:8px;}
-.pip-dot{height:6px;flex:1;border-radius:3px;background:var(--bg2);transition:background .3s;}
+.pipeline-progress{display:flex;gap:2px;margin:6px 0;}
+.pip-dot{height:5px;flex:1;border-radius:3px;background:var(--bg2);transition:background .3s;}
 .pip-dot.done{background:linear-gradient(90deg,var(--emerald),var(--teal));}
 .pip-dot.active{background:linear-gradient(90deg,var(--amber),var(--gold));animation:pulse 1.5s infinite;}
 @keyframes pulse{0%,100%{opacity:1;}50%{opacity:.5;}}
 .pipeline-steps{display:none;}.pipeline-steps.open{display:block;}
-.pip-step{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid var(--border-light);font-size:.78rem;}
+.pip-step{display:flex;align-items:flex-start;gap:8px;padding:6px 0;border-bottom:1px solid var(--border-light);font-size:.72rem;}
 .pip-step:last-child{border-bottom:none;}
-.pip-step-check{width:20px;height:20px;border:2px solid var(--border);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;margin-top:1px;}
-.pip-step-check:hover{border-color:var(--emerald);}
+.pip-step-check{width:18px;height:18px;border:2px solid var(--border);border-radius:5px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;margin-top:1px;}
 .pip-step-check.done{background:var(--emerald);border-color:var(--emerald);}
-.pip-step-check.done::after{content:'✓';color:#fff;font-size:.6rem;font-weight:700;}
+.pip-step-check.done::after{content:'✓';color:#fff;font-size:.55rem;font-weight:700;}
 .pip-step-info{flex:1;}
 .pip-step-name{font-weight:500;}.pip-step-name.struck{text-decoration:line-through;color:var(--text-dim);}
-.pip-step-desc{font-size:.68rem;color:var(--text-dim);margin-top:2px;}
-.pip-step-tool{font-size:.58rem;padding:1px 6px;border-radius:8px;background:var(--violet-light);color:var(--violet);font-weight:600;margin-top:3px;display:inline-block;}
-.pip-pct{font-size:.65rem;font-weight:700;color:var(--emerald);}
-.pip-del{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.7rem;padding:2px;}
-.pip-del:hover{color:var(--fire);}
- 
-/* TEMPLATES */
-.tpl-item{background:var(--bg);border-radius:var(--radius-sm);padding:12px;margin-bottom:8px;border:1px solid var(--border-light);}
-.tpl-item h5{font-size:.78rem;font-weight:600;margin-bottom:4px;}
-.tpl-body{font-size:.72rem;color:var(--text-mid);line-height:1.6;white-space:pre-line;background:var(--surface);padding:10px;border-radius:8px;border:1px solid var(--border-light);margin:6px 0;}
- 
-/* CHAT */
-.chat-area{max-height:240px;overflow-y:auto;margin-bottom:10px;padding:4px;}
-.chat-bubble{padding:10px 14px;margin-bottom:6px;border-radius:12px;font-size:.8rem;line-height:1.6;animation:rise .3s ease both;max-width:88%;}
-.chat-user{background:linear-gradient(135deg,var(--fire-light),var(--coral-light));color:var(--text);margin-left:auto;border-bottom-right-radius:4px;}
-.chat-ai{background:var(--bg);color:var(--text);border-bottom-left-radius:4px;border-left:3px solid var(--amber);}
-.chat-ai strong{color:var(--fire);}
-.chat-input-row{display:flex;gap:6px;}
+.pip-step-desc{font-size:.62rem;color:var(--text-dim);margin-top:1px;}
+.pip-step-tool{font-size:.52rem;padding:1px 5px;border-radius:6px;background:var(--violet-light);color:var(--violet);font-weight:600;margin-top:2px;display:inline-block;}
+.pip-pct{font-size:.6rem;font-weight:700;color:var(--emerald);}
+.pip-del{background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.65rem;padding:2px;}.pip-del:hover{color:var(--fire);}
+.pip-info-row{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:.62rem;color:var(--text-mid);margin-bottom:6px;}
+.win-item{background:linear-gradient(135deg,var(--gold-light),var(--amber-light));border:1px solid var(--amber);border-radius:var(--radius-sm);padding:12px;margin-bottom:6px;position:relative;overflow:hidden;}
+.win-title{font-size:.8rem;font-weight:600;margin-bottom:3px;}
+.win-meta{display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:3px;}
+.win-time{font-size:.5rem;color:var(--text-dim);}
+.win-steps{margin-top:4px;}
+.win-step{display:flex;align-items:flex-start;gap:5px;padding:1px 0;font-size:.68rem;color:var(--text-mid);}
+.win-step-num{width:14px;height:14px;border-radius:50%;background:var(--amber);color:#fff;display:flex;align-items:center;justify-content:center;font-size:.45rem;font-weight:800;flex-shrink:0;}
+.win-del{position:absolute;top:5px;right:8px;background:none;border:none;color:var(--text-dim);cursor:pointer;font-size:.6rem;}.win-del:hover{color:var(--fire);}
+.tpl-item{background:var(--bg);border-radius:var(--radius-sm);padding:10px;margin-bottom:6px;border:1px solid var(--border-light);}
+.tpl-item h5{font-size:.72rem;font-weight:600;margin-bottom:3px;}
+.tpl-body{font-size:.68rem;color:var(--text-mid);line-height:1.5;white-space:pre-line;background:var(--surface);padding:8px;border-radius:6px;border:1px solid var(--border-light);margin:4px 0;max-height:200px;overflow-y:auto;}
+.chat-area{max-height:220px;overflow-y:auto;margin-bottom:8px;padding:4px;}
+.chat-bubble{padding:9px 13px;margin-bottom:5px;border-radius:12px;font-size:.74rem;line-height:1.55;max-width:88%;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.chat-user{background:linear-gradient(135deg,var(--fire-light),var(--coral-light));color:var(--text);margin-left:auto;border-bottom-right-radius:3px;}
+.chat-ai{background:var(--bg);color:var(--text);border-bottom-left-radius:3px;border-left:3px solid var(--amber);}
+.chat-ai strong{color:var(--fire);font-weight:700;}
+.chat-input-row{display:flex;gap:4px;}
 .chat-input-row input{flex:1;}
- 
-/* PB */
 .pb-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;}
-.pb-item{background:var(--bg);border-radius:var(--radius-sm);padding:10px;text-align:center;border:1px solid var(--border-light);}
-.pb-item .pb-val{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;color:var(--amber);}
-.pb-item .pb-lbl{font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;margin-top:1px;}
- 
-/* EOD MODAL */
+.pb-item{background:var(--bg);border-radius:var(--radius-sm);padding:10px;text-align:center;border:1px solid var(--border-light);transition:transform .15s;}
+.pb-item:hover{transform:scale(1.03);}
+.pb-item .pb-val{font-family:'Playfair Display',serif;font-size:1.15rem;font-weight:700;color:var(--amber);}
+.pb-item .pb-lbl{font-size:.44rem;text-transform:uppercase;letter-spacing:.12em;color:var(--text-dim);font-weight:600;margin-top:1px;}
 .eod-overlay{position:fixed;inset:0;background:rgba(44,40,37,.45);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;}
 .eod-overlay.show{display:flex;}
-.eod-modal{background:var(--surface);border-radius:var(--radius);padding:24px;max-width:620px;width:92%;max-height:85vh;overflow-y:auto;box-shadow:0 8px 40px rgba(44,40,37,.18);animation:rise .3s ease both;}
-.eod-modal h2{font-family:'Playfair Display',serif;font-size:1.4rem;background:linear-gradient(135deg,var(--fire),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:12px;}
- 
-/* TAG MANAGER */
-.tag-manager{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
-.tag-pill{display:flex;align-items:center;gap:3px;padding:3px 8px;border-radius:12px;font-size:.6rem;font-weight:600;cursor:default;}
-.tag-pill .tag-x{cursor:pointer;font-size:.7rem;opacity:.5;margin-left:2px;}
-.tag-pill .tag-x:hover{opacity:1;}
- 
-/* BREAK BAR */
-.break-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border-light);padding:12px 24px;display:flex;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 -4px 16px rgba(44,40,37,.06);gap:10px;flex-wrap:wrap;}
+.eod-modal{background:var(--surface);border-radius:var(--radius);padding:20px;max-width:620px;width:92%;max-height:85vh;overflow-y:auto;box-shadow:0 8px 40px rgba(44,40,37,.18);}
+.eod-modal h2{font-family:'Playfair Display',serif;font-size:1.3rem;background:linear-gradient(135deg,var(--fire),var(--amber));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;}
+.archive-day{background:var(--bg);border-radius:var(--radius-sm);padding:12px;margin-bottom:6px;border:1px solid var(--border-light);transition:background .15s;}
+.archive-day:hover{background:var(--surface);}
+.archive-day h4{font-size:.72rem;font-weight:600;margin-bottom:4px;display:flex;justify-content:space-between;align-items:center;}
+.archive-day .a-metrics{display:flex;gap:10px;font-size:.66rem;color:var(--text-mid);flex-wrap:wrap;}
+.archive-week-total{background:linear-gradient(135deg,var(--amber-light),var(--gold-light));border:1.5px solid var(--amber);border-radius:var(--radius);padding:16px;margin-bottom:10px;box-shadow:0 2px 12px var(--amber-glow);}
+.archive-week-total h3{font-family:'Playfair Display',serif;font-size:.9rem;font-weight:700;color:var(--amber);margin-bottom:8px;}
+.archive-week-total .a-metrics{display:flex;gap:16px;font-size:.75rem;color:var(--text);flex-wrap:wrap;font-weight:500;}
+.break-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border-light);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;z-index:100;box-shadow:0 -4px 16px rgba(44,40,37,.06);gap:8px;flex-wrap:wrap;}
 .break-bar.on-break{background:linear-gradient(135deg,var(--amber-light),var(--gold-light));border-top-color:var(--amber);}
-.break-left{display:flex;align-items:center;gap:8px;font-size:.8rem;color:var(--text-mid);}
-.break-dot{width:8px;height:8px;border-radius:50%;background:var(--emerald);animation:blink 2s infinite;}
+.break-left{display:flex;align-items:center;gap:6px;font-size:.75rem;color:var(--text-mid);}
+.break-dot{width:7px;height:7px;border-radius:50%;background:var(--emerald);animation:blink 2s infinite;}
 .on-break .break-dot{background:var(--amber);}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:.3;}}
-.break-track{flex:1;max-width:220px;height:5px;background:var(--bg2);border-radius:5px;overflow:hidden;}
-.break-fill{height:100%;border-radius:5px;background:linear-gradient(90deg,var(--amber),var(--gold));transition:width .5s linear;}
- 
-.empty-msg{text-align:center;padding:20px;color:var(--text-dim);font-size:.8rem;font-style:italic;}
+.break-track{flex:1;max-width:200px;height:4px;background:var(--bg2);border-radius:4px;overflow:hidden;}
+.break-fill{height:100%;border-radius:4px;background:linear-gradient(90deg,var(--amber),var(--gold));transition:width .5s linear;}
+.empty-msg{text-align:center;padding:14px;color:var(--text-dim);font-size:.75rem;font-style:italic;}
 .section{display:none;}.section.active{display:block;}
-::-webkit-scrollbar{width:5px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+.merge-field{background:var(--sky-light);color:var(--sky);padding:1px 4px;border-radius:4px;font-size:.65rem;font-weight:600;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 </style>
 </head>
 <body>
- 
 <div class="app">
   <div class="header">
     <div class="brand"><h1>Daily Coach</h1><div class="sub">Proliance Recruiting</div></div>
     <div class="hdr-btns">
-      <button class="btn btn-green btn-sm" onclick="showEOD()">📋 EOD Report</button>
+      <button class="btn btn-green btn-sm" onclick="showEOD()">📋 EOD</button>
       <button class="btn btn-danger btn-sm" onclick="endDay()">🏁 End Day</button>
     </div>
   </div>
- 
-  <!-- LOCK-IN -->
   <div id="lockInScreen" class="card">
     <div class="lockin-prompt">
       <h2>What are your top 3 goals today? 🔥</h2>
@@ -207,230 +173,216 @@ input::placeholder,textarea::placeholder{color:var(--text-dim);}
         <div class="goal-input-row"><div class="goal-num">1</div><input type="text" id="g1" placeholder="Your #1 priority…"></div>
         <div class="goal-input-row"><div class="goal-num">2</div><input type="text" id="g2" placeholder="Second most important…"></div>
         <div class="goal-input-row"><div class="goal-num">3</div><input type="text" id="g3" placeholder="Third goal…"></div>
-        <button class="btn btn-fire btn-full" onclick="lockIn()" style="margin-top:8px;padding:12px;">🔒 Lock In — Let's Go</button>
+        <button class="btn btn-fire btn-full" onclick="lockIn()" style="margin-top:6px;padding:10px;">🔒 Lock In — Let's Go</button>
       </div>
     </div>
   </div>
- 
-  <!-- WORKSPACE -->
   <div id="workspace" style="display:none;">
- 
-    <!-- DAILY METRICS -->
-    <div class="card" style="margin-bottom:14px;">
-      <div class="card-hd"><span class="ic">📊</span> Today's Numbers</div>
+    <div class="card" style="padding:12px;margin-bottom:10px;">
+      <div class="card-hd" style="margin-bottom:6px;"><span class="ic">📊</span> Today's Numbers</div>
       <div class="metrics-row">
         <div class="metric-input"><label>Dials</label><input type="number" id="mDials" value="0" min="0" onchange="saveMetrics()"></div>
         <div class="metric-input"><label>Talked To</label><input type="number" id="mTalked" value="0" min="0" onchange="saveMetrics()"></div>
         <div class="metric-input"><label>HW Sent</label><input type="number" id="mHW" value="0" min="0" onchange="saveMetrics()"></div>
         <div class="metric-input"><label>Rejected</label><input type="number" id="mRejected" value="0" min="0" onchange="saveMetrics()"></div>
       </div>
-      <div id="metricsNudge" style="font-size:.75rem;color:var(--amber);font-weight:500;margin-top:4px;"></div>
+      <div id="metricsNudge" style="font-size:.7rem;color:var(--amber);font-weight:500;margin-top:3px;"></div>
     </div>
- 
-    <!-- STATS -->
     <div class="stats" id="statsRow"></div>
- 
-    <!-- MAIN LAYOUT: Content left, Coach always right -->
-    <div class="layout">
+    <div class="main-layout">
       <div>
-        <!-- NAV -->
         <div class="nav-tabs">
           <button class="nav-tab on" onclick="nav('today',this)">🎯 Today</button>
           <button class="nav-tab" onclick="nav('pipelines',this)">📞 Pipelines</button>
           <button class="nav-tab" onclick="nav('wins',this)">🏆 Wins</button>
           <button class="nav-tab" onclick="nav('templates',this)">📋 Templates</button>
+          <button class="nav-tab" onclick="nav('archive',this)">📁 Archive</button>
         </div>
- 
-    <!-- TODAY -->
-    <div class="section active" id="sec-today">
-      <div class="card">
-        <div class="card-hd"><span class="ic">🎯</span> Top 3 Goals</div>
-        <div style="text-align:center;margin-bottom:10px;">
-          <svg class="progress-ring" width="80" height="80" viewBox="0 0 80 80">
-            <circle cx="40" cy="40" r="34" fill="none" stroke="var(--bg2)" stroke-width="6"/>
-            <circle id="progressArc" cx="40" cy="40" r="34" fill="none" stroke="url(#rg)" stroke-width="6" stroke-linecap="round" stroke-dasharray="213.6" stroke-dashoffset="213.6" transform="rotate(-90 40 40)" style="transition:stroke-dashoffset .6s ease;"/>
-            <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="var(--fire)"/><stop offset="100%" stop-color="var(--emerald)"/></linearGradient></defs>
-            <text x="40" y="44" text-anchor="middle" font-family="Playfair Display,serif" font-size="18" fill="var(--fire)" font-weight="700" id="progressText">0/3</text>
-          </svg>
-        </div>
-        <div id="goalsContainer"></div>
-      </div>
-      <div class="layout">
-        <div>
-          <!-- SIDE TASKS -->
-          <div class="card">
-            <div class="card-hd"><span class="ic">📝</span> Side Tasks</div>
-            <div id="notepadList"></div>
-            <div class="np-add">
-              <input type="text" id="npInput" placeholder="Quick add…">
-              <select id="npCat"></select>
-              <button class="btn btn-fire btn-sm" onclick="addNote()">Add</button>
+        <!-- ═══ TODAY ═══ -->
+        <div class="section active" id="sec-today">
+          <div class="card" style="padding:14px;">
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+              <svg width="56" height="56" viewBox="0 0 56 56" style="flex-shrink:0;">
+                <circle cx="28" cy="28" r="23" fill="none" stroke="var(--bg2)" stroke-width="4"/>
+                <circle id="progressArc" cx="28" cy="28" r="23" fill="none" stroke="url(#rg)" stroke-width="4" stroke-linecap="round" stroke-dasharray="144.5" stroke-dashoffset="144.5" transform="rotate(-90 28 28)" style="transition:stroke-dashoffset .6s ease;"/>
+                <defs><linearGradient id="rg" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="var(--fire)"/><stop offset="100%" stop-color="var(--emerald)"/></linearGradient></defs>
+                <text x="28" y="32" text-anchor="middle" font-family="Playfair Display,serif" font-size="13" fill="var(--fire)" font-weight="700" id="progressText">0/3</text>
+              </svg>
+              <div style="flex:1;min-width:180px;">
+                <div class="card-hd" style="margin-bottom:6px;"><span class="ic">🎯</span> Top 3 Goals</div>
+                <div id="goalsContainer"></div>
+              </div>
             </div>
-            <div style="margin-top:8px;">
-              <div class="card-hd" style="margin-bottom:6px;"><span class="ic">🏷</span> Manage Tags <span class="hd-right" style="color:var(--sky);cursor:pointer;" onclick="document.getElementById('tagMgr').style.display=document.getElementById('tagMgr').style.display==='none'?'block':'none'">edit</span></div>
-              <div id="tagMgr" style="display:none;">
-                <div class="tag-manager" id="tagList"></div>
-                <div style="display:flex;gap:6px;">
-                  <input type="text" id="newTagName" placeholder="New tag name…" style="flex:1;">
-                  <input type="color" id="newTagColor" value="#3b9fe8" style="width:40px;padding:2px;height:34px;">
-                  <button class="btn btn-ghost btn-sm" onclick="addTag()">Add</button>
+          </div>
+          <div class="two-col">
+            <div>
+              <div class="card" style="padding:14px;">
+                <div class="card-hd"><span class="ic">📝</span> Side Tasks</div>
+                <div id="notepadList"></div>
+                <div class="np-add">
+                  <input type="text" id="npInput" placeholder="Quick add…">
+                  <select id="npCat"></select>
+                  <button class="btn btn-fire btn-sm" onclick="addNote()">Add</button>
+                </div>
+                <div style="margin-top:6px;">
+                  <div class="card-hd" style="margin-bottom:4px;"><span class="ic">🏷</span> Tags <span class="hd-right" style="color:var(--sky);" onclick="document.getElementById('tagMgr').style.display=document.getElementById('tagMgr').style.display==='none'?'block':'none'">edit</span></div>
+                  <div id="tagMgr" style="display:none;">
+                    <div class="tag-manager" id="tagList"></div>
+                    <div style="display:flex;gap:4px;"><input type="text" id="newTagName" placeholder="New tag…" style="flex:1;"><input type="color" id="newTagColor" value="#3b9fe8" style="width:34px;padding:2px;height:30px;"><button class="btn btn-ghost btn-sm" onclick="addTag()">+</button></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <div class="card" style="padding:14px;">
+                <div class="card-hd"><span class="ic">⭐</span> Qualified Leads (for EOD)</div>
+                <div id="leadsList"></div>
+                <div style="display:flex;gap:4px;margin-top:4px;">
+                  <input type="text" id="leadName" placeholder="Name…" style="flex:1;">
+                  <input type="text" id="leadNote" placeholder="Notes…" style="flex:1;">
+                  <button class="btn btn-fire btn-sm" onclick="addLead()">Add</button>
                 </div>
               </div>
             </div>
           </div>
-          <!-- QUALIFIED LEADS -->
-          <div class="card">
-            <div class="card-hd"><span class="ic">⭐</span> Qualified Leads (for EOD)</div>
-            <div id="leadsList"></div>
-            <div style="display:flex;gap:6px;margin-top:6px;">
-              <input type="text" id="leadName" placeholder="Candidate name…" style="flex:1;">
-              <input type="text" id="leadNote" placeholder="Notes…" style="flex:2;">
-              <button class="btn btn-fire btn-sm" onclick="addLead()">Add</button>
+        </div>
+        <!-- ═══ PIPELINES ═══ -->
+        <div class="section" id="sec-pipelines">
+          <div class="card"><div class="card-hd"><span class="ic">📞</span> Active Pipelines</div>
+            <div id="pipelineList"></div>
+            <div id="pipFormWrap" style="display:none;margin-top:8px;background:var(--bg);border-radius:var(--radius-sm);padding:12px;border:1px dashed var(--fire);">
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <input type="text" id="pipName" placeholder="Candidate name *">
+                <input type="email" id="pipEmail" placeholder="Email">
+                <input type="tel" id="pipPhone" placeholder="Phone">
+                <input type="text" id="pipRole" placeholder="Job title">
+                <select id="pipType"><option value="sales">🏃 Sales / Field (TR flow)</option><option value="office">🏢 Office (Interview flow)</option></select>
+                <select id="pipTeamLead"><option value="">— Team Lead —</option></select>
+                <input type="date" id="pipTRDate">
+                <input type="time" id="pipTRTime" placeholder="TR Time">
+                <input type="text" id="pipLocation" placeholder="Location / Address" style="grid-column:1/-1;">
+              </div>
+              <textarea id="pipNotes" placeholder="Notes (core driver, hesitation, motivation, what NOT to do)…" style="margin-top:6px;"></textarea>
+              <div style="display:flex;gap:4px;margin-top:6px;">
+                <button class="btn btn-fire btn-sm" onclick="addPipeline()" style="flex:1;">+ Create Pipeline</button>
+                <button class="btn btn-ghost btn-sm" onclick="document.getElementById('pipFormWrap').style.display='none';document.getElementById('pipAddBtn').style.display='block';">Cancel</button>
+              </div>
+            </div>
+            <button class="btn btn-fire btn-full btn-sm" id="pipAddBtn" onclick="document.getElementById('pipFormWrap').style.display='block';this.style.display='none';" style="margin-top:8px;">+ New Candidate</button>
+          </div>
+          <div class="card"><div class="card-hd"><span class="ic">📊</span> Pipeline Stats</div><div id="pipStats"></div></div>
+        </div>
+        <!-- ═══ WINS ═══ -->
+        <div class="section" id="sec-wins">
+          <div class="card"><div class="card-hd"><span class="ic">🏆</span> Today's Wins</div>
+            <div id="winsList"></div>
+            <button class="btn btn-amber btn-full btn-sm" onclick="showWinForm()" id="addWinBtn" style="margin-top:6px;">+ Log a Win</button>
+            <div id="winFormWrap" style="display:none;margin-top:8px;background:var(--bg);border-radius:var(--radius-sm);padding:12px;border:1px dashed var(--amber);">
+              <input type="text" id="winTitle" placeholder="What did you accomplish?" style="margin-bottom:4px;">
+              <select id="winCat" style="margin-bottom:4px;"></select>
+              <div id="winStepsBuilder"><div style="display:flex;gap:3px;margin-bottom:3px;"><span style="font-size:.6rem;font-weight:700;color:var(--amber);width:36px;flex-shrink:0;padding-top:6px;">Step 1</span><input type="text" class="ws-input" placeholder="First step…"><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--text-dim);cursor:pointer;">✕</button></div></div>
+              <div style="font-size:.65rem;color:var(--amber);font-weight:600;cursor:pointer;margin:3px 0 6px;" onclick="addWinStep()">+ Add step</div>
+              <div style="display:flex;gap:4px;"><button class="btn btn-amber btn-sm" onclick="saveWin()" style="flex:1;">🏆 Log</button><button class="btn btn-ghost btn-sm" onclick="hideWinForm()">Cancel</button></div>
             </div>
           </div>
-          <!-- PERSONAL BESTS -->
-          <div class="card">
+          <div class="card"><div class="card-hd"><span class="ic">⚡</span> Quick Win Templates</div>
+            <div style="display:flex;flex-wrap:wrap;gap:4px;">
+              <button class="btn btn-ghost btn-sm" onclick="logTplWin('hire')">Hired</button>
+              <button class="btn btn-ghost btn-sm" onclick="logTplWin('trial')">Scheduled TR</button>
+              <button class="btn btn-ghost btn-sm" onclick="logTplWin('homework')">Sent HW</button>
+              <button class="btn btn-ghost btn-sm" onclick="logTplWin('onboard')">Onboarded</button>
+            </div>
+          </div>
+        </div>
+        <!-- ═══ TEMPLATES (Mail Merge) ═══ -->
+        <div class="section" id="sec-templates">
+          <div class="card"><div class="card-hd"><span class="ic">📧</span> Mail Merge Templates <span class="hd-right" style="color:var(--fire);" onclick="showNewTplForm()">+ New Template</span></div>
+            <div style="display:flex;gap:4px;margin-bottom:10px;flex-wrap:wrap;">
+              <label style="font-size:.65rem;font-weight:600;color:var(--text-dim);padding-top:6px;">Auto-fill from:</label>
+              <select id="mergeCandidate" onchange="renderMergedTemplates()" style="flex:1;min-width:150px;"><option value="">— Select candidate —</option></select>
+            </div>
+            <div id="tplList"></div>
+            <div id="newTplForm" style="display:none;margin-top:8px;background:var(--bg);border-radius:var(--radius-sm);padding:12px;border:1px dashed var(--violet);">
+              <input type="text" id="newTplTitle" placeholder="Template name…" style="margin-bottom:4px;">
+              <textarea id="newTplBody" placeholder="Template body… Use {candidate_name}, {candidate_email}, {candidate_phone}, {job_title}, {team_lead_name}, {team_lead_phone}, {tr_date}, {tr_time}, {location}, {candidate_notes} as merge fields" style="min-height:120px;margin-bottom:4px;font-size:.7rem;"></textarea>
+              <div style="font-size:.6rem;color:var(--text-dim);margin-bottom:6px;">Merge fields: <span class="merge-field">{candidate_name}</span> <span class="merge-field">{candidate_email}</span> <span class="merge-field">{candidate_phone}</span> <span class="merge-field">{job_title}</span> <span class="merge-field">{team_lead_name}</span> <span class="merge-field">{team_lead_phone}</span> <span class="merge-field">{tr_date}</span> <span class="merge-field">{tr_time}</span> <span class="merge-field">{location}</span> <span class="merge-field">{candidate_notes}</span></div>
+              <div style="display:flex;gap:4px;"><button class="btn btn-fire btn-sm" onclick="saveNewTpl()" style="flex:1;">Save Template</button><button class="btn btn-ghost btn-sm" onclick="document.getElementById('newTplForm').style.display='none';">Cancel</button></div>
+            </div>
+          </div>
+          <div class="card"><div class="card-hd"><span class="ic">📌</span> Post-Confirmation Checklist</div>
+            <div id="confirmChecklist">
+              <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send trial run kit email</span></div>
+              <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send calendar invite</span></div>
+              <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send Waiver #1 via ShineEasy</span></div>
+              <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send Waiver #2 via ShineEasy</span></div>
+              <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Schedule day-before touchpoint</span></div>
+              <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Schedule morning-of reminder</span></div>
+            </div>
+            <button class="btn btn-ghost btn-sm btn-full" onclick="document.querySelectorAll('#confirmChecklist .np-check').forEach(c=>c.classList.remove('done'))" style="margin-top:6px;">Reset</button>
+          </div>
+        </div>
+        <!-- ═══ ARCHIVE ═══ -->
+        <div class="section" id="sec-archive">
+          <div class="card"><div class="card-hd"><span class="ic">📁</span> Weekly Archive <span class="hd-right" style="color:var(--fire);" onclick="clearSelectedArchive()">🗑 Delete Selected</span></div>
+            <div id="archiveContent"></div>
+          </div>
+        </div>
+      </div>
+      <!-- ═══ RIGHT SIDEBAR: Coach + PB ═══ -->
+      <div>
+        <div class="card" style="position:sticky;top:16px;padding:14px;">
+          <div class="card-hd"><span class="ic">💬</span> Coach</div>
+          <div class="chat-area" id="chatArea"><div class="chat-bubble chat-ai"><strong>I'm here.</strong> Vent, ask for help, or just need a "lock in" — I got you. 💪</div></div>
+          <div class="chat-input-row"><input type="text" id="chatInput" placeholder="What's on your mind…"><button class="btn btn-fire btn-sm" onclick="sendChat()">Send</button></div>
+          <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light);">
             <div class="card-hd"><span class="ic">👑</span> Personal Bests</div>
             <div class="pb-grid" id="pbGrid"></div>
           </div>
         </div>
       </div>
     </div>
- 
-    <!-- PIPELINES -->
-    <div class="section" id="sec-pipelines">
-      <div class="card"><div class="card-hd"><span class="ic">📞</span> Active Hiring Pipelines</div>
-        <div id="pipelineList"></div>
-        <div style="display:flex;gap:8px;margin-top:10px;">
-          <input type="text" id="pipName" placeholder="Candidate name…" style="flex:1;">
-          <button class="btn btn-fire btn-sm" onclick="addPipeline()">+ New Pipeline</button>
-        </div>
-      </div>
-      <div class="card"><div class="card-hd"><span class="ic">📊</span> Pipeline Stats</div><div id="pipStats"></div></div>
-    </div>
- 
-    <!-- WINS -->
-    <div class="section" id="sec-wins">
-      <div class="card"><div class="card-hd"><span class="ic">🥇</span> Today's Wins</div>
-        <div id="winsList"></div>
-        <button class="btn btn-amber btn-full btn-sm" onclick="showWinForm()" id="addWinBtn" style="margin-top:8px;">+ Log a Win</button>
-        <div id="winFormWrap" style="display:none;margin-top:10px;background:var(--bg);border-radius:var(--radius-sm);padding:14px;border:1px dashed var(--amber);">
-          <input type="text" id="winTitle" placeholder="What did you accomplish?" style="margin-bottom:6px;">
-          <select id="winCat" style="margin-bottom:6px;"></select>
-          <p style="font-size:.68rem;font-weight:600;color:var(--amber);margin:6px 0 4px;">Steps (optional):</p>
-          <div id="winStepsBuilder"><div style="display:flex;gap:4px;margin-bottom:4px;"><span style="font-size:.65rem;font-weight:700;color:var(--amber);width:40px;flex-shrink:0;padding-top:8px;">Step 1</span><input type="text" class="ws-input" placeholder="What did you do first?"><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--text-dim);cursor:pointer;">✕</button></div></div>
-          <div style="font-size:.7rem;color:var(--amber);font-weight:600;cursor:pointer;margin:4px 0 8px;" onclick="addWinStep()">+ Add step</div>
-          <div style="display:flex;gap:6px;"><button class="btn btn-amber btn-sm" onclick="saveWin()" style="flex:1;">🏆 Log Win</button><button class="btn btn-ghost btn-sm" onclick="hideWinForm()">Cancel</button></div>
-        </div>
-      </div>
-      <div class="card"><div class="card-hd"><span class="ic">⚡</span> Quick Win Templates</div>
-        <button class="btn btn-ghost btn-full btn-sm" onclick="logTplWin('hire')" style="margin-bottom:6px;">🏆 Hired a Sales Apprentice</button>
-        <button class="btn btn-ghost btn-full btn-sm" onclick="logTplWin('trial')" style="margin-bottom:6px;">🏆 Scheduled a Trial Run</button>
-        <button class="btn btn-ghost btn-full btn-sm" onclick="logTplWin('homework')" style="margin-bottom:6px;">🏆 Sent Homework to Candidates</button>
-        <button class="btn btn-ghost btn-full btn-sm" onclick="logTplWin('onboard')">🏆 Onboarded a New Hire</button>
-      </div>
-    </div>
- 
-    <!-- TEMPLATES -->
-    <div class="section" id="sec-templates">
-      <div class="card"><div class="card-hd"><span class="ic">💬</span> Check-In Templates</div>
-        <div class="tpl-item"><h5>📨 After Scheduling</h5><div class="tpl-body">Hey [Name]! 🎉 You're all set for your trial run on [Date] at [Time].
- 
-📍 Address: [Office Address]
-👤 You'll be with: [Team Lead Name]
- 
-A couple things before then:
-1. I'm sending you 2 waivers via email — please sign both ASAP
-2. Research tip: check out our website and social media so you come in prepared!
- 
-Let me know if you have any questions. Excited for you! 💪</div><button class="btn btn-ghost btn-sm" onclick="copyTpl(this)">📋 Copy</button></div>
-        <div class="tpl-item"><h5>📱 Day Before Check-In</h5><div class="tpl-body">Hey [Name]! Quick check-in before tomorrow 🙌
- 
-✅ Did you get a chance to complete both waivers?
-🚗 How's the commute looking to [Address]?
-❓ Any questions before you come in?
- 
-Also curious — after doing your research, what stood out to you about Proliance? And what are you most excited about for tomorrow?
- 
-See you at [Time]! 🔥</div><button class="btn btn-ghost btn-sm" onclick="copyTpl(this)">📋 Copy</button></div>
-        <div class="tpl-item"><h5>☀️ Morning Of</h5><div class="tpl-body">Good morning [Name]! Today's the day! 🎉
- 
-Just confirming:
-📍 [Address]
-⏰ [Time]
-👤 Ask for [Team Lead Name] when you arrive
- 
-Dress comfortable and bring your energy — you're going to crush it. See you soon! 💪</div><button class="btn btn-ghost btn-sm" onclick="copyTpl(this)">📋 Copy</button></div>
-        <div class="tpl-item"><h5>📧 Homework Message</h5><div class="tpl-body">Hey [Name]! Great chatting with you today 💪
- 
-Before we schedule anything, I'd love for you to do a little homework on us:
- 
-🔗 [Company Website Link]
-🔗 [Social Media Link]
-🔗 [Any other links]
- 
-Take some time to learn about Proliance — what we do, how we help homeowners, and our culture. Once you've done your research, shoot me a message and we'll talk next steps!
- 
-Talk soon 🔥</div><button class="btn btn-ghost btn-sm" onclick="copyTpl(this)">📋 Copy</button></div>
-      </div>
-      <div class="card"><div class="card-hd"><span class="ic">📌</span> Post-Confirmation Checklist</div>
-        <div id="confirmChecklist">
-          <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send trial run kit email</span></div>
-          <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send calendar invite (candidate + team lead)</span></div>
-          <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send Waiver #1 via ShineEasy</span></div>
-          <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Send Waiver #2 via ShineEasy</span></div>
-          <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Schedule day-before touchpoint</span></div>
-          <div class="notepad-item"><div class="np-check" onclick="this.classList.toggle('done')"></div><span class="np-text">Schedule morning-of reminder</span></div>
-        </div>
-        <button class="btn btn-ghost btn-sm btn-full" onclick="document.querySelectorAll('#confirmChecklist .np-check').forEach(c=>c.classList.remove('done'))" style="margin-top:8px;">Reset</button>
-      </div>
-    </div>
- 
-      </div><!-- end left column -->
- 
-      <!-- PERSISTENT RIGHT SIDEBAR: Coach -->
-      <div>
-        <div class="card" style="position:sticky;top:20px;">
-          <div class="card-hd"><span class="ic">💬</span> Coach</div>
-          <div class="chat-area" id="chatArea"><div class="chat-bubble chat-ai"><strong>I'm here.</strong> Vent, ask for help, or just need a "lock in" — I got you. 💪</div></div>
-          <div class="chat-input-row"><input type="text" id="chatInput" placeholder="What's on your mind…"><button class="btn btn-fire btn-sm" onclick="sendChat()">Send</button></div>
-        </div>
-      </div>
-    </div><!-- end main layout -->
- 
   </div>
 </div>
- 
-<!-- EOD MODAL -->
 <div class="eod-overlay" id="eodOverlay"><div class="eod-modal" id="eodModal"></div></div>
- 
-<!-- BREAK BAR -->
 <div class="break-bar" id="breakBar">
   <div class="break-left"><div class="break-dot"></div><span id="breakText">Working — break in <strong>25:00</strong></span></div>
   <div class="break-track"><div class="break-fill" id="breakFill" style="width:0%"></div></div>
   <button class="btn btn-sm btn-ghost" id="breakBtn" onclick="toggleBreak()">Take Break</button>
 </div>
- 
 <script>
 // ═══ STATE ═══
 const TODAY=new Date().toDateString();
-const DEFAULT_TAGS=[
-  {name:'Pipeline',color:'#e84830'},{name:'Interviews',color:'#3b9fe8'},{name:'Team',color:'#8b5cf6'},
-  {name:'Onboarding',color:'#22b573'},{name:'Relationships',color:'#f0a030'},{name:'LinkedIn',color:'#14b8a6'},
-  {name:'Meetings',color:'#e84580'},{name:'Social',color:'#14b8a6'},{name:'Admin',color:'#9a938a'}
+const DEFAULT_TAGS=[{name:'Pipeline',color:'#e84830'},{name:'Interviews',color:'#3b9fe8'},{name:'Team',color:'#8b5cf6'},{name:'Onboarding',color:'#22b573'},{name:'Relationships',color:'#f0a030'},{name:'LinkedIn',color:'#14b8a6'},{name:'Meetings',color:'#e84580'},{name:'Social',color:'#14b8a6'},{name:'Admin',color:'#9a938a'}];
+const DEFAULT_TEAM_LEADS=[
+  {name:'Zachary Moskowitz',phone:'(630) 538-4694'},{name:'Michele Michalak',phone:'(773) 272-5892'},
+  {name:'Michael Flanders',phone:'(708) 551-6303'},{name:'Sean Julian',phone:'(312) 485-4973'},
+  {name:'Luigi Robles',phone:'(708) 789-7440'},{name:'Kevin Faucher',phone:'(331) 246-3118'},
+  {name:'Christopher Anderson',phone:'(708) 804-0008'},{name:'Ethan Marcano',phone:'(815) 546-6899'},
+  {name:'Fernando Robles',phone:'(630) 674-6334'}
 ];
- 
-let state=JSON.parse(localStorage.getItem('pdc6_state')||'null');
-let profile=JSON.parse(localStorage.getItem('pdc6_profile')||'null');
-if(!profile) profile={bestDials:0,bestDialsDate:'',bestTalked:0,bestTalkedDate:'',bestTasks:0,bestTasksDate:'',tags:[...DEFAULT_TAGS],archive:[]};
+const DEFAULT_TEMPLATES=[
+  {id:1,title:'Trial Run Kit (Email)',body:`Hi {candidate_name},\nCongratulations! You've officially made it to the Trial Run for the {job_title} role at Proliance. This is your chance to show us what you're made of.\n\nTrial Run Details\nDate: {tr_date}\nTime: {tr_time}\nLocation: {location}\nDress Code: Casual but presentable. Please dress appropriately for the weather.\n\nThis trial run will give you the opportunity to demonstrate your ability to handle door-to-door fieldwork. You'll work closely with one of our team leaders to observe, engage, and begin learning the ropes.\n\nCompensation: You will earn $20/hour or around $200 - $300 per signed appointment, whichever amount is higher. Our pay period ends every Friday at noon, and payments are processed the following week.\n\nIf you're not hired after the trial, you will receive a check for your payment. If you are brought on board, we will set you up with direct deposit, which will include your trial payment.\n\nMinimum Expectations:\n- Talk to 20+ people\n- Set 2 appointments\n- Close 1 signed deal\n- Demonstrate strong coachability, positivity, and grit\n\nAfter the first week, the role transitions to a commission-only structure, because at Proliance, we build winners. Effort leads to success.\n\nAdditional Information: The trial run may last one or two days, depending on performance. Please sign the Trial Run Waiver and Photo/Video Release Form prior to your scheduled date. These documents will be sent to you shortly via email or text.\n\nFor any assistance on the day of your trial, please contact:\n{team_lead_name} – Sales Leader\ntel: {team_lead_phone}\nFeel free to text if you need help finding the office.\n\nWelcome to the Proliance Tryouts — where champions are made.\n\nLooking forward to seeing you!`},
+  {id:2,title:'TR Text Reminder',body:`Hi {candidate_name}, I've sent over your Trial Run Kit; This includes the schedule, address, pay details, your mentor's information, and the two waivers needed tomorrow.\n\nThis next step is really about your decision to show up and see what this is about. The team will be setting aside the full day to train, so it's important that the timing and your readiness are aligned on your end as well.\n\nIf anything unexpected comes up, please message me before the deadline. Clear communication matters here - it shows reliability, respect for your own word, and professionalism. Not showing up without notice will reflect poorly and may affect your eligibility for future opportunities.`},
+  {id:3,title:'Homework Message',body:`Hi {candidate_name}, it was great speaking with you! Before we move forward,\n\nAt Proliance, we value people with intention. We focus on culture and focus on training, support, and fostering both personal and professional growth. Here are some links to learn more about us:\n\nListen to this Roof Sales Pitch in action:\nhttps://www.instagram.com/p/DGEE7IqP1rU/\nhttps://www.youtube.com/watch?v=iik2o24EQTU\nhttps://proliancegc.com/\nhttps://www.linkedin.com/in/tomselfyo/`},
+  {id:4,title:'Team Lead Handoff',body:`Hi {team_lead_name},\n\nYour apprentice will meet you at the office: {location} on {tr_date}\n\nTheir name is {candidate_name}\nTheir contact number: {candidate_phone}\n\nApprentice Details:\n{candidate_notes}`},
+  {id:5,title:'After Scheduling (Text)',body:`Hey {candidate_name}! 🎉 You're all set for your trial run on {tr_date} at {tr_time}.\n\n📍 Address: {location}\n👤 You'll be with: {team_lead_name}\n\nA couple things before then:\n1. I'm sending you 2 waivers via email — please sign both ASAP\n2. Research tip: check out our website and social media so you come in prepared!\n\nLet me know if you have any questions. Excited for you! 💪`},
+  {id:6,title:'Day Before Check-In',body:`Hey {candidate_name}! Quick check-in before tomorrow 🙌\n\n✅ Did you get a chance to complete both waivers?\n🚗 How's the commute looking to {location}?\n❓ Any questions before you come in?\n\nAlso curious — after doing your research, what stood out to you about Proliance? And what are you most excited about for tomorrow?\n\nSee you at {tr_time}! 🔥`},
+  {id:7,title:'Morning Of Reminder',body:`Good morning {candidate_name}! Today's the day! 🎉\n\nJust confirming:\n📍 {location}\n⏰ {tr_time}\n👤 Ask for {team_lead_name} when you arrive\n\nDress comfortable and bring your energy — you're going to crush it. See you soon! 💪`}
+];
+const PIP_STEPS_SALES=[{name:'Dial leads (JustCall)',desc:'Call list + voicemails',tool:'JustCall'},{name:'Screen candidate',desc:'Phone screen — fit, interest, availability',tool:null},{name:'Send homework',desc:'Template message with research links',tool:'JustCall / Email'},{name:'Candidate completes homework',desc:'Wait for response, follow up',tool:null},{name:'Schedule trial run',desc:'Coordinate with team lead + candidate',tool:'Scheduling Tool'},{name:'Send trial run kit email',desc:'Address, TL details, logistics',tool:'Gmail'},{name:'Send calendar invite',desc:'Loop in candidate + team lead',tool:'Google Calendar'},{name:'Send 2 waivers (ShineEasy)',desc:'Both waivers to candidate email',tool:'ShineEasy'},{name:'Pre-trial touchpoints',desc:'Confirm waivers, commute, Q&A',tool:'JustCall / Text'}];
+const PIP_STEPS_OFFICE=[{name:'Phone / Group Interview',desc:'Initial screening',tool:null},{name:'Send cal invite for 1-on-1',desc:'Schedule in-person',tool:'Google Calendar'},{name:'1-on-1 in person',desc:'In-person interview',tool:null},{name:'Send cal invite (final)',desc:'If needed',tool:'Google Calendar'},{name:'Final interview',desc:'Final round',tool:null},{name:'Send offer',desc:'Offer letter / details',tool:'Gmail'},{name:'Employment paperwork',desc:'Once accepted',tool:null},{name:'Send orientation schedule',desc:'Orientation details',tool:'Gmail'},{name:'Send training schedule',desc:'Training plan',tool:'Gmail'}];
+
+let state=JSON.parse(localStorage.getItem('pdc7_state')||'null');
+let profile=JSON.parse(localStorage.getItem('pdc7_profile')||'null');
+if(!profile) profile={bestDials:0,bestDialsDate:'',bestTalked:0,bestTalkedDate:'',bestTasks:0,bestTasksDate:'',tags:[...DEFAULT_TAGS],teamLeads:[...DEFAULT_TEAM_LEADS],templates:[...DEFAULT_TEMPLATES],archive:[]};
 if(!profile.tags) profile.tags=[...DEFAULT_TAGS];
- 
+if(!profile.teamLeads) profile.teamLeads=[...DEFAULT_TEAM_LEADS];
+if(!profile.templates) profile.templates=[...DEFAULT_TEMPLATES];
+
 if(!state||state.date!==TODAY){
-  // Archive yesterday
   if(state&&state.date&&state.lockedIn){
     profile.archive.push({...state});
-    if(profile.archive.length>30) profile.archive.shift();
-    // Update PBs
+    if(profile.archive.length>60) profile.archive.shift();
     const m=state.metrics||{};
     if((m.dials||0)>profile.bestDials){profile.bestDials=m.dials;profile.bestDialsDate=state.date;}
     if((m.talked||0)>profile.bestTalked){profile.bestTalked=m.talked;profile.bestTalkedDate=state.date;}
@@ -443,256 +395,150 @@ if(!state.leads) state.leads=[];
 if(!state.metrics) state.metrics={dials:0,talked:0,hw:0,rejected:0};
 if(!state.pipelines) state.pipelines=[];
 if(!state.wins) state.wins=[];
- 
-function save(){localStorage.setItem('pdc6_state',JSON.stringify(state));localStorage.setItem('pdc6_profile',JSON.stringify(profile));}
-let breakStartedAt=null, breakWorkStart=null, onBreak=false;
-const WORK_MS=25*60*1000, BREAK_MS=5*60*1000;
+
+function save(){localStorage.setItem('pdc7_state',JSON.stringify(state));localStorage.setItem('pdc7_profile',JSON.stringify(profile));}
+let breakStartedAt=null,breakWorkStart=null,onBreak=false;
+const WORK_MS=25*60*1000,BREAK_MS=5*60*1000;
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
- 
+
 // ═══ NAV ═══
-function nav(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');}
- 
+function nav(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');if(id==='templates')renderMergedTemplates();if(id==='archive')renderArchive();}
+
 // ═══ TAGS ═══
 function getTagStyle(name){const t=profile.tags.find(x=>x.name===name);const c=t?t.color:'#9a938a';return `background:${c}18;color:${c};`;}
 function renderTagSelect(selId){const el=document.getElementById(selId);if(!el)return;el.innerHTML=profile.tags.map(t=>`<option value="${esc(t.name)}">${t.name}</option>`).join('');}
-function renderTags(){
-  const el=document.getElementById('tagList');if(!el)return;
-  el.innerHTML=profile.tags.map((t,i)=>`<div class="tag-pill" style="background:${t.color}18;color:${t.color};">${t.name}<span class="tag-x" onclick="removeTag(${i})">✕</span></div>`).join('');
-  renderTagSelect('npCat');renderTagSelect('winCat');
-}
-function addTag(){const n=document.getElementById('newTagName').value.trim(),c=document.getElementById('newTagColor').value;if(!n)return;if(profile.tags.find(t=>t.name.toLowerCase()===n.toLowerCase()))return;profile.tags.push({name:n,color:c});save();renderTags();document.getElementById('newTagName').value='';}
+function renderTags(){const el=document.getElementById('tagList');if(!el)return;el.innerHTML=profile.tags.map((t,i)=>`<div class="tag-pill" style="background:${t.color}18;color:${t.color};">${t.name}<span class="tag-x" onclick="removeTag(${i})">✕</span></div>`).join('');renderTagSelect('npCat');renderTagSelect('winCat');}
+function addTag(){const n=document.getElementById('newTagName').value.trim(),c=document.getElementById('newTagColor').value;if(!n||profile.tags.find(t=>t.name.toLowerCase()===n.toLowerCase()))return;profile.tags.push({name:n,color:c});save();renderTags();document.getElementById('newTagName').value='';}
 function removeTag(i){if(profile.tags.length<=1)return;profile.tags.splice(i,1);save();renderTags();}
- 
+
+// ═══ TEAM LEADS ═══
+function renderTeamLeadSelect(){const el=document.getElementById('pipTeamLead');if(!el)return;el.innerHTML='<option value="">— Team Lead —</option>'+profile.teamLeads.map(tl=>`<option value="${esc(tl.name)}" data-phone="${esc(tl.phone)}">${tl.name}</option>`).join('');}
+
 // ═══ METRICS ═══
-function saveMetrics(){
-  state.metrics.dials=parseInt(document.getElementById('mDials').value)||0;
-  state.metrics.talked=parseInt(document.getElementById('mTalked').value)||0;
-  state.metrics.hw=parseInt(document.getElementById('mHW').value)||0;
-  state.metrics.rejected=parseInt(document.getElementById('mRejected').value)||0;
-  save();renderStats();renderNudge();
-}
-function loadMetrics(){
-  document.getElementById('mDials').value=state.metrics.dials||0;
-  document.getElementById('mTalked').value=state.metrics.talked||0;
-  document.getElementById('mHW').value=state.metrics.hw||0;
-  document.getElementById('mRejected').value=state.metrics.rejected||0;
-}
-function renderNudge(){
-  const el=document.getElementById('metricsNudge');
-  const yesterday=profile.archive.length?profile.archive[profile.archive.length-1]:null;
-  const yd=yesterday?.metrics?.dials||0;
-  const td=state.metrics.dials||0;
-  if(yd>0&&td>0){
-    if(td>yd) el.textContent=`🔥 ${td} dials today vs ${yd} yesterday — you're ahead! Keep pushing.`;
-    else if(td===yd) el.textContent=`⚡ ${td} dials — tied with yesterday. One more to beat it!`;
-    else el.textContent=`📞 ${td} dials so far — you hit ${yd} yesterday. ${yd-td+1} more to beat it!`;
-  } else if(td>0){
-    el.textContent=`📞 ${td} dials today. ${profile.bestDials>td?`Your PB is ${profile.bestDials} — go beat it!`:'Setting the pace!'}`;
-  } else el.textContent='';
-}
- 
+function saveMetrics(){state.metrics.dials=parseInt(document.getElementById('mDials').value)||0;state.metrics.talked=parseInt(document.getElementById('mTalked').value)||0;state.metrics.hw=parseInt(document.getElementById('mHW').value)||0;state.metrics.rejected=parseInt(document.getElementById('mRejected').value)||0;save();renderStats();renderNudge();}
+function loadMetrics(){document.getElementById('mDials').value=state.metrics.dials||0;document.getElementById('mTalked').value=state.metrics.talked||0;document.getElementById('mHW').value=state.metrics.hw||0;document.getElementById('mRejected').value=state.metrics.rejected||0;}
+function renderNudge(){const el=document.getElementById('metricsNudge');const y=profile.archive.length?profile.archive[profile.archive.length-1]:null;const yd=y?.metrics?.dials||0;const td=state.metrics.dials||0;if(yd>0&&td>0){if(td>yd)el.textContent=`🔥 ${td} dials vs ${yd} yesterday — ahead!`;else if(td===yd)el.textContent=`⚡ Tied with yesterday at ${td}. One more!`;else el.textContent=`📞 ${td} so far — ${yd} yesterday. ${yd-td+1} more to beat it!`;}else if(td>0)el.textContent=`📞 ${td} dials.${profile.bestDials>td?` PB: ${profile.bestDials}`:' Setting pace!'}`;else el.textContent='';}
+
 // ═══ STATS ═══
-function renderStats(){
-  const gd=state.goals.filter(g=>g.done).length;
-  const nd=state.notes.filter(n=>n.done).length;
-  const el=document.getElementById('statsRow');
-  el.innerHTML=`
-    <div class="stat"><div class="stat-num" style="color:var(--fire);">${gd}/3</div><div class="stat-lbl">Goals</div></div>
-    <div class="stat"><div class="stat-num" style="color:var(--sky);">${nd}</div><div class="stat-lbl">Tasks Done</div></div>
-    <div class="stat"><div class="stat-num" style="color:var(--amber);">${state.metrics.dials||0}</div><div class="stat-lbl">Dials</div></div>
-    <div class="stat"><div class="stat-num" style="color:var(--emerald);">${state.metrics.talked||0}</div><div class="stat-lbl">Talked To</div></div>
-    <div class="stat"><div class="stat-num" style="color:var(--violet);">${state.metrics.hw||0}</div><div class="stat-lbl">HW Sent</div></div>
-    <div class="stat"><div class="stat-num" style="color:var(--amber);">${state.wins.length}</div><div class="stat-lbl">Wins</div></div>
-  `;
-}
- 
-// ═══ PB ═══
-function renderPB(){const f=d=>d?new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'—';const h=`
-  <div class="pb-item"><div class="pb-val">${profile.bestDials}</div><div class="pb-lbl">Most Dials</div></div>
-  <div class="pb-item"><div class="pb-val">${profile.bestTalked}</div><div class="pb-lbl">Most Talked To</div></div>
-  <div class="pb-item"><div class="pb-val">${profile.bestTasks}</div><div class="pb-lbl">Most Tasks</div></div>
-  <div class="pb-item"><div class="pb-val">${profile.archive.length}</div><div class="pb-lbl">Days Tracked</div></div>
-`;document.getElementById('pbGrid').innerHTML=h;}
- 
+function renderStats(){const gd=state.goals.filter(g=>g.done).length,nd=state.notes.filter(n=>n.done).length;document.getElementById('statsRow').innerHTML=`<div class="stat"><div class="stat-num" style="color:var(--fire);">${gd}/3</div><div class="stat-lbl">Goals</div></div><div class="stat"><div class="stat-num" style="color:var(--sky);">${nd}</div><div class="stat-lbl">Tasks</div></div><div class="stat"><div class="stat-num" style="color:var(--amber);">${state.metrics.dials||0}</div><div class="stat-lbl">Dials</div></div><div class="stat"><div class="stat-num" style="color:var(--emerald);">${state.metrics.talked||0}</div><div class="stat-lbl">Talked</div></div><div class="stat"><div class="stat-num" style="color:var(--violet);">${state.metrics.hw||0}</div><div class="stat-lbl">HW</div></div><div class="stat"><div class="stat-num" style="color:var(--rose);">${state.wins.length}</div><div class="stat-lbl">Wins</div></div>`;}
+function renderPB(){document.getElementById('pbGrid').innerHTML=`<div class="pb-item"><div class="pb-val">${profile.bestDials}</div><div class="pb-lbl">Most Dials</div></div><div class="pb-item"><div class="pb-val">${profile.bestTalked}</div><div class="pb-lbl">Most Talked</div></div><div class="pb-item"><div class="pb-val">${profile.bestTasks}</div><div class="pb-lbl">Most Tasks</div></div><div class="pb-item"><div class="pb-val">${profile.archive.length}</div><div class="pb-lbl">Days</div></div>`;}
+
 // ═══ LOCK-IN ═══
 function lockIn(){const g1=document.getElementById('g1').value.trim(),g2=document.getElementById('g2').value.trim(),g3=document.getElementById('g3').value.trim();if(!g1||!g2||!g3){alert('Fill all 3!');return;}state.goals=[{text:g1,done:false},{text:g2,done:false},{text:g3,done:false}];state.lockedIn=true;save();showWS();}
 function showWS(){document.getElementById('lockInScreen').style.display='none';document.getElementById('workspace').style.display='block';renderAll();}
-function renderAll(){renderGoals();renderNotes();renderWins();renderPipelines();renderLeads();renderStats();renderPB();renderTags();loadMetrics();renderNudge();initBreakTimer();}
+function renderAll(){renderGoals();renderNotes();renderWins();renderPipelines();renderLeads();renderStats();renderPB();renderTags();renderTeamLeadSelect();loadMetrics();renderNudge();initBreakTimer();}
 if(state.lockedIn) showWS();
- 
+
 // ═══ END DAY ═══
-function endDay(){if(!confirm('End your day? This will archive today\'s data and give you a fresh start tomorrow.'))return;
-  profile.archive.push({...state});if(profile.archive.length>30)profile.archive.shift();
-  const m=state.metrics||{};
-  if((m.dials||0)>profile.bestDials){profile.bestDials=m.dials;profile.bestDialsDate=state.date;}
-  if((m.talked||0)>profile.bestTalked){profile.bestTalked=m.talked;profile.bestTalkedDate=state.date;}
-  const td=(state.goals||[]).filter(g=>g.done).length+(state.notes||[]).filter(n=>n.done).length;
-  if(td>profile.bestTasks){profile.bestTasks=td;profile.bestTasksDate=state.date;}
-  // Show EOD first
-  showEOD();
-  // Reset state but keep pipelines
-  const keepPipelines=state.pipelines||[];
-  state={date:'ENDED',goals:[],notes:[],wins:[],pipelines:keepPipelines,leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};
-  save();
-  // Add reload button to EOD modal
-  const eodModal=document.getElementById('eodModal');
-  const existingBtns=eodModal.querySelector('div:last-child');
-  if(existingBtns){existingBtns.innerHTML=`<button class="btn btn-amber" onclick="copyEOD()">📋 Copy to Clipboard</button><button class="btn btn-fire" onclick="localStorage.removeItem('pdc6_state');location.reload();">🔄 Start Fresh Tomorrow</button>`;}
-}
- 
+function endDay(){if(!confirm('End your day? This archives today and gives a fresh start.'))return;
+  profile.archive.push({...state});if(profile.archive.length>60)profile.archive.shift();
+  const m=state.metrics||{};if((m.dials||0)>profile.bestDials){profile.bestDials=m.dials;profile.bestDialsDate=state.date;}if((m.talked||0)>profile.bestTalked){profile.bestTalked=m.talked;profile.bestTalkedDate=state.date;}
+  const td=(state.goals||[]).filter(g=>g.done).length+(state.notes||[]).filter(n=>n.done).length;if(td>profile.bestTasks){profile.bestTasks=td;profile.bestTasksDate=state.date;}
+  showEOD();const kp=state.pipelines||[];state={date:'ENDED',goals:[],notes:[],wins:[],pipelines:kp,leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};save();
+  const em=document.getElementById('eodModal');const btns=em.querySelector('div:last-child');if(btns)btns.innerHTML=`<button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-fire" onclick="localStorage.removeItem('pdc7_state');location.reload();">🔄 Fresh Start</button>`;}
+
 // ═══ GOALS ═══
-function renderGoals(){const el=document.getElementById('goalsContainer'),dn=state.goals.filter(g=>g.done).length;
-  document.getElementById('progressArc').setAttribute('stroke-dashoffset',213.6-(213.6*dn/3));document.getElementById('progressText').textContent=`${dn}/3`;
-  el.innerHTML=state.goals.map((g,i)=>`<div class="goal-item ${g.done?'completed':''}" id="goal-${i}"><div class="goal-check ${g.done?'done':''}" onclick="togGoal(${i})"></div><h3>${esc(g.text)}</h3></div>`).join('');}
+function renderGoals(){const el=document.getElementById('goalsContainer'),dn=state.goals.filter(g=>g.done).length;document.getElementById('progressArc').setAttribute('stroke-dashoffset',144.5-(144.5*dn/3));document.getElementById('progressText').textContent=`${dn}/3`;el.innerHTML=state.goals.map((g,i)=>`<div class="goal-item ${g.done?'completed':''}" id="goal-${i}" onclick="togGoal(${i})"><div class="goal-check ${g.done?'done':''}"></div><h3>${esc(g.text)}</h3></div>`).join('');}
 function togGoal(i){state.goals[i].done=!state.goals[i].done;if(state.goals[i].done)spawnConfetti(document.getElementById(`goal-${i}`));save();renderGoals();renderStats();}
-function spawnConfetti(el){const b=document.createElement('div');b.className='confetti-burst';const c=['var(--fire)','var(--emerald)','var(--sky)','var(--amber)','var(--violet)','var(--rose)'];for(let i=0;i<14;i++){const p=document.createElement('div');p.className='confetti-piece';const a=(i/14)*Math.PI*2,d=45+Math.random()*35;p.style.cssText=`background:${c[i%c.length]};width:${4+Math.random()*4}px;height:${4+Math.random()*5}px;--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d}px;--rot:${Math.random()*360}deg;animation-delay:${Math.random()*.12}s;`;b.appendChild(p);}el.appendChild(b);setTimeout(()=>b.remove(),900);}
- 
+function spawnConfetti(el){const b=document.createElement('div');b.className='confetti-burst';const c=['var(--fire)','var(--emerald)','var(--sky)','var(--amber)','var(--violet)','var(--rose)'];for(let i=0;i<12;i++){const p=document.createElement('div');p.className='confetti-piece';const a=(i/12)*Math.PI*2,d=40+Math.random()*30;p.style.cssText=`background:${c[i%c.length]};width:${3+Math.random()*3}px;height:${3+Math.random()*4}px;--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d}px;--rot:${Math.random()*360}deg;animation-delay:${Math.random()*.1}s;`;b.appendChild(p);}el.appendChild(b);setTimeout(()=>b.remove(),900);}
+
 // ═══ NOTES ═══
-function renderNotes(){const el=document.getElementById('notepadList');if(!state.notes.length){el.innerHTML='<div class="empty-msg">No side tasks yet 🎯</div>';return;}const s=[...state.notes].sort((a,b)=>a.done===b.done?0:a.done?1:-1);el.innerHTML=s.map(n=>`<div class="notepad-item"><div class="np-check ${n.done?'done':''}" onclick="togNote(${n.id})"></div><span class="np-text ${n.done?'struck':''}">${esc(n.text)}</span><span class="tag-color" style="${getTagStyle(n.cat)}">${n.cat}</span><button class="np-del" onclick="delNote(${n.id})">✕</button></div>`).join('');}
+function renderNotes(){const el=document.getElementById('notepadList');if(!state.notes.length){el.innerHTML='<div class="empty-msg">No side tasks yet 🎯</div>';return;}el.innerHTML=[...state.notes].sort((a,b)=>a.done===b.done?0:a.done?1:-1).map(n=>`<div class="notepad-item"><div class="np-check ${n.done?'done':''}" onclick="togNote(${n.id})"></div><span class="np-text ${n.done?'struck':''}">${esc(n.text)}</span><span class="tag-color" style="${getTagStyle(n.cat)}">${n.cat}</span><button class="np-del" onclick="delNote(${n.id})">✕</button></div>`).join('');}
 function addNote(){const t=document.getElementById('npInput').value.trim();if(!t)return;state.notes.push({id:Date.now(),text:t,cat:document.getElementById('npCat').value,done:false});save();document.getElementById('npInput').value='';renderNotes();renderStats();}
-function quickNote(t,c){state.notes.push({id:Date.now(),text:t,cat:c,done:false});save();renderNotes();renderStats();}
 function togNote(id){const n=state.notes.find(x=>x.id===id);if(n){n.done=!n.done;save();renderNotes();renderStats();}}
 function delNote(id){state.notes=state.notes.filter(x=>x.id!==id);save();renderNotes();renderStats();}
 document.getElementById('npInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')addNote();});
- 
+
 // ═══ LEADS ═══
-function renderLeads(){const el=document.getElementById('leadsList');if(!state.leads.length){el.innerHTML='<div class="empty-msg">No qualified leads yet</div>';return;}
-  el.innerHTML=state.leads.map((l,i)=>`<div class="notepad-item"><span class="np-text"><strong>${esc(l.name)}</strong> — ${esc(l.note)}</span><button class="np-del" onclick="state.leads.splice(${i},1);save();renderLeads();">✕</button></div>`).join('');}
+function renderLeads(){const el=document.getElementById('leadsList');if(!state.leads.length){el.innerHTML='<div class="empty-msg">No qualified leads yet</div>';return;}el.innerHTML=state.leads.map((l,i)=>`<div class="notepad-item"><span class="np-text"><strong>${esc(l.name)}</strong> — ${esc(l.note)}</span><button class="np-del" onclick="state.leads.splice(${i},1);save();renderLeads();">✕</button></div>`).join('');}
 function addLead(){const n=document.getElementById('leadName').value.trim(),note=document.getElementById('leadNote').value.trim();if(!n)return;state.leads.push({name:n,note:note||'—'});save();document.getElementById('leadName').value='';document.getElementById('leadNote').value='';renderLeads();}
- 
 // ═══ PIPELINES ═══
-const PIP_STEPS=[{name:'Dial leads (JustCall)',desc:'Go through call list, leave voicemails',tool:'JustCall'},{name:'Screen candidate',desc:'Phone screen — assess fit, interest, availability',tool:null},{name:'Send homework',desc:'Template message with links via text/email',tool:'JustCall / Email'},{name:'Candidate completes homework',desc:'Wait for response, follow up if needed',tool:null},{name:'Schedule trial run',desc:'Coordinate date with team lead + candidate',tool:'Scheduling Tool'},{name:'Send trial run kit email',desc:'Address, team lead details, logistics',tool:'Gmail'},{name:'Send calendar invite',desc:'Loop in candidate + team lead',tool:'Google Calendar'},{name:'Send 2 waivers (ShineEasy)',desc:'Both waivers to candidate email',tool:'ShineEasy'},{name:'Pre-trial touchpoints',desc:'Confirm waivers, commute, questions, excitement',tool:'JustCall / Text'}];
-function addPipeline(){const n=document.getElementById('pipName').value.trim();if(!n)return;state.pipelines.push({id:Date.now(),name:n,steps:PIP_STEPS.map(s=>({...s,done:false})),expanded:true});save();document.getElementById('pipName').value='';renderPipelines();}
-function renderPipelines(){const el=document.getElementById('pipelineList');if(!state.pipelines.length){el.innerHTML='<div class="empty-msg">No active pipelines</div>';renderPipStats();return;}
+function addPipeline(){const n=document.getElementById('pipName').value.trim();if(!n){alert('Name required');return;}
+  const role=document.getElementById('pipRole').value.trim()||'—';const ptype=document.getElementById('pipType').value;
+  const tlName=document.getElementById('pipTeamLead').value;const tl=profile.teamLeads.find(t=>t.name===tlName);
+  state.pipelines.push({id:Date.now(),name:n,email:document.getElementById('pipEmail').value.trim(),phone:document.getElementById('pipPhone').value.trim(),role:role,ptype:ptype,teamLead:tlName,teamLeadPhone:tl?tl.phone:'',trDate:document.getElementById('pipTRDate').value,trTime:document.getElementById('pipTRTime').value,location:document.getElementById('pipLocation').value.trim(),notes:document.getElementById('pipNotes').value.trim(),steps:(ptype==='sales'?PIP_STEPS_SALES:PIP_STEPS_OFFICE).map(s=>({...s,done:false})),expanded:false});
+  save();['pipName','pipEmail','pipPhone','pipRole','pipTeamLead','pipTRDate','pipTRTime','pipLocation','pipNotes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});document.getElementById('pipFormWrap').style.display='none';document.getElementById('pipAddBtn').style.display='block';renderPipelines();}
+
+function renderPipelines(){const el=document.getElementById('pipelineList');if(!state.pipelines.length){el.innerHTML='<div class="empty-msg">No active pipelines</div>';renderPipStats();renderCandidateSelect();return;}
   el.innerHTML=state.pipelines.map((p,pi)=>{const dn=p.steps.filter(s=>s.done).length,pct=Math.round(dn/p.steps.length*100),nx=p.steps.findIndex(s=>!s.done);
-    return `<div class="pipeline-card"><div class="pipeline-header" onclick="togglePip(${pi})"><h4>👤 ${esc(p.name)} <span class="pip-pct">${pct}%</span></h4><div style="display:flex;gap:6px;"><button class="pip-del" onclick="event.stopPropagation();delPip(${pi})">✕</button><span class="pip-arrow ${p.expanded?'open':''}">▶</span></div></div><div class="pipeline-progress">${p.steps.map((s,si)=>`<div class="pip-dot ${s.done?'done':si===nx?'active':''}"></div>`).join('')}</div><div class="pipeline-steps ${p.expanded?'open':''}">${p.steps.map((s,si)=>`<div class="pip-step"><div class="pip-step-check ${s.done?'done':''}" onclick="togPipStep(${pi},${si})"></div><div class="pip-step-info"><div class="pip-step-name ${s.done?'struck':''}">${s.name}</div><div class="pip-step-desc">${s.desc}</div>${s.tool?`<span class="pip-step-tool">${s.tool}</span>`:''}</div></div>`).join('')}</div></div>`;}).join('');renderPipStats();}
+    const isSales=(p.ptype||'sales')==='sales';
+    const salesStages=['Dialing','Screening','HW Sent','HW Review','TR Sched','TR Kit','Cal Invite','Waivers','Pre-TR','✅ Done'];
+    const officeStages=['Interview','Cal Invite','1-on-1','Cal Invite','Final','Offer','Paperwork','Orientation','Training','✅ Done'];
+    const stages=isSales?salesStages:officeStages;const stage=dn>=p.steps.length?'✅ Done':stages[Math.min(dn,stages.length-1)];
+    const info=[];if(p.email)info.push(`📧 ${esc(p.email)}`);if(p.phone)info.push(`📞 ${esc(p.phone)}`);if(p.role&&p.role!=='—')info.push(`💼 ${esc(p.role)}`);if(p.teamLead)info.push(`👤 ${esc(p.teamLead)}`);if(p.trDate)info.push(`📅 ${p.trDate}`);if(p.trTime)info.push(`⏰ ${p.trTime}`);if(p.location)info.push(`📍 ${esc(p.location)}`);
+    return `<div class="pipeline-card"><div class="pipeline-header" onclick="togglePip(${pi})"><h4>${esc(p.name)} <span class="pip-pct">${pct}%</span> <span style="font-size:.55rem;padding:1px 6px;border-radius:6px;background:${dn>=p.steps.length?'var(--emerald-light)':'var(--amber-light)'};color:${dn>=p.steps.length?'var(--emerald)':'var(--amber)'};font-weight:600;">${stage}</span> <span style="font-size:.5rem;padding:1px 5px;border-radius:6px;background:${isSales?'var(--fire-light)':'var(--sky-light)'};color:${isSales?'var(--fire)':'var(--sky)'};font-weight:600;">${isSales?'🏃 Sales':'🏢 Office'}</span></h4><div style="display:flex;gap:4px;align-items:center;"><button class="pip-del" onclick="event.stopPropagation();if(confirm('Remove?'))delPip(${pi})">✕</button><span class="pip-arrow ${p.expanded?'open':''}">▶</span></div></div>${info.length?`<div class="pip-info-row">${info.join(' ')}</div>`:''}${p.notes?`<div style="font-size:.62rem;color:var(--text-dim);margin-bottom:4px;padding:3px 6px;background:var(--bg2);border-radius:4px;">📝 ${esc(p.notes)}</div>`:''}
+    <div class="pipeline-progress">${p.steps.map((s,si)=>`<div class="pip-dot ${s.done?'done':si===nx?'active':''}"></div>`).join('')}</div><div class="pipeline-steps ${p.expanded?'open':''}">${p.steps.map((s,si)=>`<div class="pip-step"><div class="pip-step-check ${s.done?'done':''}" onclick="togPipStep(${pi},${si})"></div><div class="pip-step-info"><div class="pip-step-name ${s.done?'struck':''}">${s.name}</div><div class="pip-step-desc">${s.desc}</div>${s.tool?`<span class="pip-step-tool">${s.tool}</span>`:''}</div></div>`).join('')}</div></div>`;}).join('');renderPipStats();renderCandidateSelect();}
 function togglePip(pi){state.pipelines[pi].expanded=!state.pipelines[pi].expanded;save();renderPipelines();}
 function togPipStep(pi,si){state.pipelines[pi].steps[si].done=!state.pipelines[pi].steps[si].done;save();renderPipelines();}
 function delPip(pi){state.pipelines.splice(pi,1);save();renderPipelines();}
-function renderPipStats(){const el=document.getElementById('pipStats');const a=state.pipelines.length,c=state.pipelines.filter(p=>p.steps.every(s=>s.done)).length;
-  el.innerHTML=`<div style="text-align:center;padding:8px;"><div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--fire);">${a}</div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Active</div></div><div style="text-align:center;padding:8px;"><div style="font-family:'Playfair Display',serif;font-size:2rem;font-weight:700;color:var(--emerald);">${c}</div><div style="font-size:.55rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Completed</div></div>`;}
- 
+function renderPipStats(){const el=document.getElementById('pipStats');const a=state.pipelines.length,c=state.pipelines.filter(p=>p.steps.every(s=>s.done)).length;el.innerHTML=`<div style="display:flex;gap:20px;justify-content:center;padding:8px;"><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--fire);">${a}</div><div style="font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Active</div></div><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--emerald);">${c}</div><div style="font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Done</div></div></div>`;}
+
+// ═══ CANDIDATE SELECT (for mail merge) ═══
+function renderCandidateSelect(){const el=document.getElementById('mergeCandidate');if(!el)return;el.innerHTML='<option value="">— Select candidate —</option>'+state.pipelines.map((p,i)=>`<option value="${i}">${esc(p.name)}${p.role&&p.role!=='—'?' — '+esc(p.role):''}</option>`).join('');}
+
 // ═══ WINS ═══
-function renderWins(){const el=document.getElementById('winsList');if(!state.wins.length){el.innerHTML='<div class="empty-msg">No wins yet 🏆</div>';return;}
-  el.innerHTML=state.wins.map((w,i)=>`<div class="win-item"><button class="win-del" onclick="delWin(${i})">✕</button><div class="win-title">${esc(w.title)}</div><div class="win-meta"><span class="tag-color" style="${getTagStyle(w.cat)}">${w.cat}</span><span class="win-time">${w.time||''}</span></div>${w.steps?.length?`<div class="win-steps">${w.steps.map((s,j)=>`<div class="win-step"><div class="win-step-num">${j+1}</div><span>${esc(s)}</span></div>`).join('')}</div>`:''}</div>`).join('');}
+function renderWins(){const el=document.getElementById('winsList');if(!state.wins.length){el.innerHTML='<div class="empty-msg">No wins yet 🏆</div>';return;}el.innerHTML=state.wins.map((w,i)=>`<div class="win-item"><button class="win-del" onclick="delWin(${i})">✕</button><div class="win-title">${esc(w.title)}</div><div class="win-meta"><span class="tag-color" style="${getTagStyle(w.cat)}">${w.cat}</span><span class="win-time">${w.time||''}</span></div>${w.steps?.length?`<div class="win-steps">${w.steps.map((s,j)=>`<div class="win-step"><div class="win-step-num">${j+1}</div><span>${esc(s)}</span></div>`).join('')}</div>`:''}</div>`).join('');}
 function showWinForm(){document.getElementById('winFormWrap').style.display='block';document.getElementById('addWinBtn').style.display='none';}
 function hideWinForm(){document.getElementById('winFormWrap').style.display='none';document.getElementById('addWinBtn').style.display='block';}
-function addWinStep(){const b=document.getElementById('winStepsBuilder'),c=b.children.length+1;const r=document.createElement('div');r.style.cssText='display:flex;gap:4px;margin-bottom:4px;';r.innerHTML=`<span style="font-size:.65rem;font-weight:700;color:var(--amber);width:40px;flex-shrink:0;padding-top:8px;">Step ${c}</span><input type="text" class="ws-input" placeholder="Then what?"><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--text-dim);cursor:pointer;">✕</button>`;b.appendChild(r);}
+function addWinStep(){const b=document.getElementById('winStepsBuilder'),c=b.children.length+1;const r=document.createElement('div');r.style.cssText='display:flex;gap:3px;margin-bottom:3px;';r.innerHTML=`<span style="font-size:.6rem;font-weight:700;color:var(--amber);width:36px;flex-shrink:0;padding-top:6px;">Step ${c}</span><input type="text" class="ws-input" placeholder="Then what?"><button onclick="this.parentElement.remove()" style="background:none;border:none;color:var(--text-dim);cursor:pointer;">✕</button>`;b.appendChild(r);}
 function saveWin(){const t=document.getElementById('winTitle').value.trim();if(!t)return;const steps=[];document.querySelectorAll('.ws-input').forEach(i=>{if(i.value.trim())steps.push(i.value.trim());});state.wins.unshift({title:t,cat:document.getElementById('winCat').value,steps,time:new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})});save();renderWins();renderStats();hideWinForm();document.getElementById('winTitle').value='';}
 function delWin(i){state.wins.splice(i,1);save();renderWins();renderStats();}
-function logTplWin(type){const tpls={hire:{title:'Hired a Sales Apprentice',cat:'Pipeline',steps:['Dialed leads via JustCall','Screened candidate','Sent homework','Candidate completed homework','Scheduled trial run','Sent trial run kit email','Sent calendar invite','Sent 2 waivers via ShineEasy','Pre-trial touchpoints']},trial:{title:'Scheduled a Trial Run',cat:'Pipeline',steps:['Candidate completed homework','Coordinated with team lead','Confirmed date','Sent trial run kit','Sent calendar invite','Sent 2 waivers']},homework:{title:'Sent Homework to Candidates',cat:'Pipeline',steps:['Identified candidates from calls','Prepared homework template','Sent via text/email','Followed up']},onboard:{title:'Onboarded a New Hire',cat:'Onboarding',steps:['Collected documents','Completed paperwork','Set up access','Coordinated Day 1','Sent welcome info']}};const tp=tpls[type];if(!tp)return;state.wins.unshift({...tp,time:new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})});save();renderWins();renderStats();}
- 
-// ═══ TEMPLATES ═══
-function copyTpl(btn){navigator.clipboard.writeText(btn.previousElementSibling.textContent.trim()).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);});}
- 
-// ═══ CHAT (no history persistence) ═══
-async function sendChat(){const inp=document.getElementById('chatInput'),t=inp.value.trim();if(!t)return;inp.value='';
-  const chatEl=document.getElementById('chatArea');
-  chatEl.innerHTML+=`<div class="chat-bubble chat-user">${esc(t)}</div>`;
-  chatEl.innerHTML+=`<div class="chat-bubble chat-ai" id="typing" style="opacity:.5;"><em>Coach is typing...</em></div>`;
-  chatEl.scrollTop=chatEl.scrollHeight;
-  try{
-    const gl=state.goals.filter(g=>!g.done).length,gd=3-gl;
-    const ctx=`Goals: ${gd}/3. Dials: ${state.metrics.dials}. Talked to: ${state.metrics.talked}. HW sent: ${state.metrics.hw}. Wins: ${state.wins.length}. Pipelines: ${state.pipelines.length}.`;
-    const resp=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,context:ctx})});
-    const data=await resp.json();
-    document.getElementById('typing')?.remove();
-    const reply=data.reply||fallback(t);
-    chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${reply}</div>`;
-  }catch(e){document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${fallback(t)}</div>`;}
-  chatEl.scrollTop=chatEl.scrollHeight;
-}
-function fallback(msg){const l=msg.toLowerCase(),gl=state.goals.filter(g=>!g.done).length,gd=3-gl,d=state.metrics.dials;
-  if(l.match(/can'?t focus|distracted/))return`<strong>Close the tabs. Phone down. 15 minutes.</strong> You've got ${d} dials today — let's add to that. 🎯`;
-  if(l.match(/break|tired|pause/))return`<strong>Take 5.</strong> Hit the break button. Come back stronger. ⏸️`;
-  if(l.match(/stressed|overwhelm|ugh/))return`<strong>I hear you.</strong> Just the next action. ${gd}/3 goals done — that's progress. One thing at a time. 🫡`;
-  if(l.match(/done|finished|crushed|boom/))return`<strong>LET'S GO 🔥</strong> ${gd}/3 goals crushed, ${d} dials today!`;
-  return`<strong>${gd}/3 goals, ${d} dials today.</strong> ${gl>0?'What\'s next on the list?':'Goals done — hit those side tasks!'}`;
-}
+function logTplWin(type){const tpls={hire:{title:'Hired a Sales Apprentice',cat:'Pipeline',steps:['Dialed leads','Screened candidate','Sent homework','HW completed','Scheduled TR','Sent TR kit','Calendar invite','Waivers sent','Pre-TR touchpoints']},trial:{title:'Scheduled a Trial Run',cat:'Pipeline',steps:['HW completed','Coordinated with TL','Confirmed date','Sent TR kit','Calendar invite','Waivers sent']},homework:{title:'Sent Homework',cat:'Pipeline',steps:['Identified candidates','Prepared template','Sent via text/email','Followed up']},onboard:{title:'Onboarded New Hire',cat:'Onboarding',steps:['Collected docs','Completed paperwork','Set up access','Coordinated Day 1','Sent welcome info']}};const tp=tpls[type];if(!tp)return;state.wins.unshift({...tp,time:new Date().toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})});save();renderWins();renderStats();}
+
+// ═══ MAIL MERGE TEMPLATES ═══
+function showNewTplForm(){document.getElementById('newTplForm').style.display='block';}
+function saveNewTpl(){const title=document.getElementById('newTplTitle').value.trim(),body=document.getElementById('newTplBody').value.trim();if(!title||!body)return;profile.templates.push({id:Date.now(),title,body});save();document.getElementById('newTplTitle').value='';document.getElementById('newTplBody').value='';document.getElementById('newTplForm').style.display='none';renderMergedTemplates();}
+function deleteTpl(id){profile.templates=profile.templates.filter(t=>t.id!==id);save();renderMergedTemplates();}
+function mergeTemplate(body,candidate){if(!candidate)return body;return body.replace(/\{candidate_name\}/g,candidate.name||'').replace(/\{candidate_email\}/g,candidate.email||'').replace(/\{candidate_phone\}/g,candidate.phone||'').replace(/\{job_title\}/g,candidate.role||'').replace(/\{team_lead_name\}/g,candidate.teamLead||'').replace(/\{team_lead_phone\}/g,candidate.teamLeadPhone||'').replace(/\{tr_date\}/g,candidate.trDate||'').replace(/\{tr_time\}/g,candidate.trTime||'').replace(/\{location\}/g,candidate.location||'').replace(/\{candidate_notes\}/g,candidate.notes||'');}
+function renderMergedTemplates(){const el=document.getElementById('tplList');const ci=document.getElementById('mergeCandidate')?.value;const candidate=ci!==''&&ci!==undefined?state.pipelines[parseInt(ci)]:null;
+  el.innerHTML=profile.templates.map(t=>{const merged=mergeTemplate(t.body,candidate);return `<div class="tpl-item"><h5>${esc(t.title)} ${t.id>7?`<span style="font-size:.55rem;color:var(--fire);cursor:pointer;margin-left:6px;" onclick="deleteTpl(${t.id})">🗑 delete</span>`:''}</h5><div class="tpl-body">${esc(merged)}</div><button class="btn btn-ghost btn-sm" onclick="copyTplText(this)">📋 Copy</button></div>`;}).join('');}
+function copyTplText(btn){navigator.clipboard.writeText(btn.previousElementSibling.textContent.trim()).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);});}
+
+// ═══ ARCHIVE (Weekly Sun-Sat) ═══
+function getWeekRange(dateStr){const d=new Date(dateStr);const day=d.getDay();const sun=new Date(d);sun.setDate(d.getDate()-day);const sat=new Date(sun);sat.setDate(sun.getDate()+6);return {start:sun.toDateString(),end:sat.toDateString(),label:`${sun.toLocaleDateString('en-US',{month:'short',day:'numeric'})} – ${sat.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`};}
+function renderArchive(){const el=document.getElementById('archiveContent');if(!profile.archive.length){el.innerHTML='<div class="empty-msg">No archived days yet. Click "End Day" to archive.</div>';return;}
+  // Group by week
+  const weeks={};profile.archive.forEach((a,i)=>{const w=getWeekRange(a.date);if(!weeks[w.label])weeks[w.label]={range:w,days:[],indices:[]};weeks[w.label].days.push(a);weeks[w.label].indices.push(i);});
+  let h='';Object.values(weeks).reverse().forEach(week=>{
+    const totals={dials:0,talked:0,hw:0,rejected:0};week.days.forEach(d=>{const m=d.metrics||{};totals.dials+=m.dials||0;totals.talked+=m.talked||0;totals.hw+=m.hw||0;totals.rejected+=m.rejected||0;});
+    h+=`<div class="archive-week-total"><h3>📊 Week: ${week.range.label}</h3><div class="a-metrics"><span>📞 Dials: <strong>${totals.dials}</strong></span><span>🗣 Talked: <strong>${totals.talked}</strong></span><span>📧 HW Sent: <strong>${totals.hw}</strong></span><span>❌ Rejected: <strong>${totals.rejected}</strong></span><span>📅 Days: <strong>${week.days.length}</strong></span></div></div>`;
+    week.days.forEach((d,di)=>{const m=d.metrics||{};const gd=(d.goals||[]).filter(g=>g.done).length;const dt=new Date(d.date).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      h+=`<div class="archive-day"><h4><span>${dt} — ${gd}/3 goals</span><label style="font-size:.6rem;"><input type="checkbox" class="archive-cb" data-idx="${week.indices[di]}" style="width:auto;margin-right:3px;">select</label></h4><div class="a-metrics"><span>📞 ${m.dials||0}</span><span>🗣 ${m.talked||0}</span><span>📧 ${m.hw||0}</span><span>❌ ${m.rejected||0}</span><span>🏆 ${(d.wins||[]).length} wins</span></div></div>`;
+    });
+  });
+  el.innerHTML=h;}
+function clearSelectedArchive(){const cbs=document.querySelectorAll('.archive-cb:checked');if(!cbs.length){alert('Select entries to delete first');return;}if(!confirm(`Delete ${cbs.length} archived day(s)?`))return;const indices=[...cbs].map(cb=>parseInt(cb.dataset.idx)).sort((a,b)=>b-a);indices.forEach(i=>profile.archive.splice(i,1));save();renderArchive();}
+
+// ═══ CHAT ═══
+async function sendChat(){const inp=document.getElementById('chatInput'),t=inp.value.trim();if(!t)return;inp.value='';const chatEl=document.getElementById('chatArea');chatEl.innerHTML+=`<div class="chat-bubble chat-user">${esc(t)}</div><div class="chat-bubble chat-ai" id="typing" style="opacity:.5;"><em>Coach is typing...</em></div>`;chatEl.scrollTop=chatEl.scrollHeight;
+  try{const ctx=`Goals: ${state.goals.filter(g=>g.done).length}/3. Dials: ${state.metrics.dials}. Talked: ${state.metrics.talked}. HW: ${state.metrics.hw}. Wins: ${state.wins.length}. Pipelines: ${state.pipelines.length}.`;const resp=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,context:ctx})});const data=await resp.json();document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${data.reply||fallback(t)}</div>`;}catch(e){document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${fallback(t)}</div>`;}chatEl.scrollTop=chatEl.scrollHeight;}
+function fallback(msg){const l=msg.toLowerCase(),gl=state.goals.filter(g=>!g.done).length,gd=3-gl,d=state.metrics.dials;if(l.match(/can'?t focus|distracted/))return`<strong>Close tabs. Phone down. 15 min.</strong> ${d} dials — let's add more. 🎯`;if(l.match(/break|tired|pause/))return`<strong>Take 5.</strong> Hit the break button. ⏸️`;if(l.match(/stressed|overwhelm|ugh/))return`<strong>I hear you.</strong> Next action only. ${gd}/3 done. One thing. 🫡`;if(l.match(/done|finished|crushed|boom/))return`<strong>LET'S GO 🔥</strong> ${gd}/3 goals, ${d} dials!`;return`<strong>${gd}/3 goals, ${d} dials.</strong> ${gl>0?'Next goal?':'Side tasks time!'}`;}
 document.getElementById('chatInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
- 
-// ═══ EOD (Slack format) ═══
-function showEOD(){const m=document.getElementById('eodModal');const ds=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});
-  const gd=state.goals.filter(g=>g.done),gl=state.goals.filter(g=>!g.done);
-  const nd=state.notes.filter(n=>n.done),nl=state.notes.filter(n=>!n.done);
-  const mt=state.metrics;
-  let h=`<h2>EOD Report</h2><div style="font-size:.8rem;color:var(--text-mid);margin-bottom:16px;">Preview — click Copy to paste in Slack</div>`;
-  h+=`<pre style="background:var(--bg);padding:16px;border-radius:var(--radius-sm);font-family:'Sora',sans-serif;font-size:.8rem;line-height:1.8;white-space:pre-wrap;border:1px solid var(--border-light);">`;
-  h+=`EOD – ${ds}\n\n`;
-  h+=`Total Dials: ${mt.dials||0}\n`;
-  h+=`Talked To (excluding reschedules): ${mt.talked||0}\n`;
-  h+=`Rejected / Unqualified: ${mt.rejected||0}\n\n`;
-  if(state.leads.length){h+=`Qualified Lead:\n`;state.leads.forEach(l=>{h+=`● ${l.name} – ${l.note}\n`;});h+=`\n`;}
-  if(mt.hw>0) h+=`Homework Sent: ${mt.hw}\n\n`;
-  // Pipeline candidates
-  const activePips=state.pipelines.filter(p=>!p.steps.every(s=>s.done));
-  if(activePips.length){h+=`Pipeline:\n`;activePips.forEach(p=>{const nx=p.steps.find(s=>!s.done);h+=`● ${p.name}${nx?' – '+nx.name:''}\n`;});h+=`\n`;}
-  // Other tasks
-  const otherTasks=[...gd.map(g=>g.text),...nd.map(n=>n.text)];
-  if(otherTasks.length){h+=`Other Tasks:\n`;otherTasks.forEach(t=>{h+=`● ${t}\n`;});}
-  h+=`</pre>`;
-  h+=`<div style="display:flex;gap:8px;margin-top:16px;"><button class="btn btn-amber" onclick="copyEOD()">📋 Copy to Clipboard</button><button class="btn btn-ghost" onclick="closeEOD()">Close</button></div>`;
-  m.innerHTML=h;document.getElementById('eodOverlay').classList.add('show');
-}
+
+// ═══ EOD ═══
+function showEOD(){const m=document.getElementById('eodModal');const ds=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});const mt=state.metrics;const gd=state.goals.filter(g=>g.done),nd=state.notes.filter(n=>n.done);
+  let h=`<h2>EOD Report</h2><pre style="background:var(--bg);padding:14px;border-radius:var(--radius-sm);font-family:'Sora',sans-serif;font-size:.75rem;line-height:1.7;white-space:pre-wrap;border:1px solid var(--border-light);">EOD – ${ds}\n\nTotal Dials: ${mt.dials||0}\nTalked To (excluding reschedules): ${mt.talked||0}\nRejected / Unqualified: ${mt.rejected||0}\n`;
+  if(state.leads.length){h+=`\nQualified Lead:\n`;state.leads.forEach(l=>{h+=`● ${esc(l.name)} – ${esc(l.note)}\n`;});}
+  if(mt.hw>0)h+=`\nHomework Sent: ${mt.hw}\n`;
+  const ap=state.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){h+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);h+=`● ${esc(p.name)}${nx?' – '+nx.name:''}\n`;});}
+  const ot=[...gd.map(g=>g.text),...nd.map(n=>n.text)];if(ot.length){h+=`\nOther Tasks:\n`;ot.forEach(t=>{h+=`● ${esc(t)}\n`;});}
+  h+=`</pre><div style="display:flex;gap:6px;margin-top:12px;"><button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-ghost" onclick="closeEOD()">Close</button></div>`;
+  m.innerHTML=h;document.getElementById('eodOverlay').classList.add('show');}
 function closeEOD(){document.getElementById('eodOverlay').classList.remove('show');}
-function copyEOD(){const ds=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});
-  const mt=state.metrics,gd=state.goals.filter(g=>g.done),nd=state.notes.filter(n=>n.done);
+function copyEOD(){const ds=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});const mt=state.metrics,gd=state.goals.filter(g=>g.done),nd=state.notes.filter(n=>n.done);
   let r=`EOD – ${ds}\n\nTotal Dials: ${mt.dials||0}\nTalked To (excluding reschedules): ${mt.talked||0}\nRejected / Unqualified: ${mt.rejected||0}\n`;
   if(state.leads.length){r+=`\nQualified Lead:\n`;state.leads.forEach(l=>{r+=`● ${l.name} – ${l.note}\n`;});}
-  if(mt.hw>0) r+=`\nHomework Sent: ${mt.hw}\n`;
-  const activePips=state.pipelines.filter(p=>!p.steps.every(s=>s.done));
-  if(activePips.length){r+=`\nPipeline:\n`;activePips.forEach(p=>{const nx=p.steps.find(s=>!s.done);r+=`● ${p.name}${nx?' – '+nx.name:''}\n`;});}
-  const otherTasks=[...gd.map(g=>g.text),...nd.map(n=>n.text)];
-  if(otherTasks.length){r+=`\nOther Tasks:\n`;otherTasks.forEach(t=>{r+=`● ${t}\n`;});}
-  navigator.clipboard.writeText(r).then(()=>{const btn=document.querySelector('.eod-modal .btn-amber');if(btn){btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy to Clipboard',2000);}});
-}
+  if(mt.hw>0)r+=`\nHomework Sent: ${mt.hw}\n`;
+  const ap=state.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){r+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);r+=`● ${p.name}${nx?' – '+nx.name:''}\n`;});}
+  const ot=[...gd.map(g=>g.text),...nd.map(n=>n.text)];if(ot.length){r+=`\nOther Tasks:\n`;ot.forEach(t=>{r+=`● ${t}\n`;});}
+  navigator.clipboard.writeText(r).then(()=>{const btn=document.querySelector('.eod-modal .btn-amber');if(btn){btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);}});}
 document.getElementById('eodOverlay')?.addEventListener('click',function(e){if(e.target===this)closeEOD();});
- 
-// ═══ BREAK TIMER (timestamp-based, works across tabs) ═══
- 
-function initBreakTimer(){
-  breakWorkStart=Date.now();
-  onBreak=false;
-  requestAnimationFrame(tickBreak);
-}
- 
-function tickBreak(){
-  const now=Date.now();
-  if(onBreak){
-    const elapsed=now-breakStartedAt;
-    const remaining=Math.max(0,BREAK_MS-elapsed);
-    const pct=Math.min(100,(elapsed/BREAK_MS)*100);
-    document.getElementById('breakFill').style.width=pct+'%';
-    const m=Math.floor(remaining/60000),s=Math.floor((remaining%60000)/1000);
-    document.getElementById('breakText').innerHTML=`On break — <strong>${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}</strong>`;
-    if(remaining<=0){onBreak=false;breakWorkStart=Date.now();document.getElementById('breakBar').classList.remove('on-break');document.getElementById('breakBtn').textContent='Take Break';}
-  }else{
-    const elapsed=now-(breakWorkStart||now);
-    const remaining=Math.max(0,WORK_MS-elapsed);
-    const pct=Math.min(100,(elapsed/WORK_MS)*100);
-    document.getElementById('breakFill').style.width=pct+'%';
-    const m=Math.floor(remaining/60000),s=Math.floor((remaining%60000)/1000);
-    document.getElementById('breakText').innerHTML=`Working — break in <strong>${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}</strong>`;
-    if(remaining<=0){
-      onBreak=true;breakStartedAt=Date.now();
-      document.getElementById('breakBar').classList.add('on-break');document.getElementById('breakBtn').textContent='Skip Break';
-      // Send notification
-      if('Notification' in window && Notification.permission==='granted') new Notification('🎯 Proliance Coach',{body:'Break time! 5 minutes — stand up, stretch, hydrate.',icon:'🏆',requireInteraction:true});
-      else if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
-    }
-  }
-  requestAnimationFrame(tickBreak);
-}
- 
-function toggleBreak(){
-  if(onBreak){onBreak=false;breakWorkStart=Date.now();document.getElementById('breakBar').classList.remove('on-break');document.getElementById('breakBtn').textContent='Take Break';}
-  else{onBreak=true;breakStartedAt=Date.now();document.getElementById('breakBar').classList.add('on-break');document.getElementById('breakBtn').textContent='Skip Break';}
-}
- 
-// Request notification permission on load
-if('Notification' in window && Notification.permission==='default') Notification.requestPermission();
- 
-// Enter keys
+
+// ═══ BREAK TIMER ═══
+function initBreakTimer(){breakWorkStart=Date.now();onBreak=false;requestAnimationFrame(tickBreak);}
+function tickBreak(){const now=Date.now();if(onBreak){const el=now-breakStartedAt,rem=Math.max(0,BREAK_MS-el);document.getElementById('breakFill').style.width=(el/BREAK_MS*100)+'%';const m=Math.floor(rem/60000),s=Math.floor((rem%60000)/1000);document.getElementById('breakText').innerHTML=`Break — <strong>${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}</strong>`;if(rem<=0){onBreak=false;breakWorkStart=Date.now();document.getElementById('breakBar').classList.remove('on-break');document.getElementById('breakBtn').textContent='Take Break';}}else{const el=now-(breakWorkStart||now),rem=Math.max(0,WORK_MS-el);document.getElementById('breakFill').style.width=(el/WORK_MS*100)+'%';const m=Math.floor(rem/60000),s=Math.floor((rem%60000)/1000);document.getElementById('breakText').innerHTML=`Working — <strong>${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}</strong>`;if(rem<=0){onBreak=true;breakStartedAt=Date.now();document.getElementById('breakBar').classList.add('on-break');document.getElementById('breakBtn').textContent='Skip';if('Notification' in window&&Notification.permission==='granted')new Notification('🎯 Coach',{body:'Break time! 5 min.',requireInteraction:true});}}requestAnimationFrame(tickBreak);}
+function toggleBreak(){if(onBreak){onBreak=false;breakWorkStart=Date.now();document.getElementById('breakBar').classList.remove('on-break');document.getElementById('breakBtn').textContent='Take Break';}else{onBreak=true;breakStartedAt=Date.now();document.getElementById('breakBar').classList.add('on-break');document.getElementById('breakBtn').textContent='Skip';}}
+if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();
 ['g1','g2','g3'].forEach((id,i)=>{document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter'){if(i<2)document.getElementById(`g${i+2}`).focus();else lockIn();}});});
 </script>
 </body>

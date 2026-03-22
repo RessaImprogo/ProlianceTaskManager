@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Proliance Daily Coach</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Playfair+Display:wght@600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#faf7f2;--bg2:#f0ebe3;--surface:#ffffff;--border:#e2dacf;--border-light:#eae4da;--text:#1e1c1a;--text-dim:#97918a;--text-mid:#635d56;--fire:#dc4425;--fire-light:#dc442515;--fire-glow:#dc442535;--coral:#ef6c4f;--coral-light:#ef6c4f12;--amber:#e8a020;--amber-light:#e8a02015;--amber-glow:#e8a02035;--gold:#c89810;--gold-light:#c8981015;--emerald:#1aab68;--emerald-light:#1aab6815;--emerald-glow:#1aab6835;--sky:#2d8fd6;--sky-light:#2d8fd615;--violet:#7c4deb;--violet-light:#7c4deb15;--rose:#d94070;--rose-light:#d9407015;--teal:#0fa898;--teal-light:#0fa89815;--radius:16px;--radius-sm:10px;--shadow:0 1px 3px rgba(30,28,26,.04),0 6px 20px rgba(30,28,26,.03);--shadow-pop:0 4px 16px rgba(30,28,26,.08),0 12px 32px rgba(30,28,26,.04);}
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -153,6 +153,10 @@ textarea{resize:vertical;min-height:40px;}
 .empty-msg{text-align:center;padding:14px;color:var(--text-dim);font-size:.75rem;font-style:italic;}
 .section{display:none;}.section.active{display:block;}
 .merge-field{background:var(--sky-light);color:var(--sky);padding:1px 4px;border-radius:4px;font-size:.65rem;font-weight:600;}
+.quote-banner{text-align:center;padding:22px 28px;margin-bottom:14px;position:relative;}
+.quote-banner .quote-text{font-family:'Cormorant Garamond',serif;font-size:1.35rem;font-weight:500;font-style:italic;color:var(--text);line-height:1.5;letter-spacing:.01em;max-width:700px;margin:0 auto 6px;}
+.quote-banner .quote-ref{font-family:'DM Sans',sans-serif;font-size:.6rem;font-weight:600;text-transform:uppercase;letter-spacing:.15em;color:var(--text-dim);}
+.quote-banner::before{content:'"';font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:600;color:var(--amber);opacity:.2;position:absolute;top:2px;left:50%;transform:translateX(-70px);line-height:1;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-track{background:transparent;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
 </style>
 </head>
@@ -165,9 +169,25 @@ textarea{resize:vertical;min-height:40px;}
       <button class="btn btn-danger btn-sm" onclick="endDay()">🏁 End Day</button>
     </div>
   </div>
-  <div id="lockInScreen" class="card">
+  <!-- DAILY QUOTE -->
+  <div class="card quote-banner" id="quoteBanner" style="display:none;">
+    <div class="quote-text" id="quoteText"></div>
+    <div class="quote-ref" id="quoteRef"></div>
+  </div>
+  <!-- NAME PROMPT (first time only) -->
+  <div id="nameScreen" class="card" style="display:none;">
     <div class="lockin-prompt">
-      <h2>What are your top 3 goals today? 🔥</h2>
+      <h2>Welcome to Daily Coach 👋</h2>
+      <p>What's your name? This helps your coach personalize your experience.</p>
+      <div style="max-width:360px;margin:0 auto;display:flex;gap:8px;">
+        <input type="text" id="userName" placeholder="Your first name…" style="flex:1;">
+        <button class="btn btn-fire" onclick="saveName()">Let's Go</button>
+      </div>
+    </div>
+  </div>
+  <div id="lockInScreen" class="card" style="display:none;">
+    <div class="lockin-prompt">
+      <h2 id="lockInGreeting">What are your top 3 goals today? 🔥</h2>
       <p>Lock in on what matters. Everything else → side notepad.</p>
       <div class="goal-inputs">
         <div class="goal-input-row"><div class="goal-num">1</div><input type="text" id="g1" placeholder="Your #1 priority…"></div>
@@ -332,7 +352,7 @@ textarea{resize:vertical;min-height:40px;}
       <div>
         <div class="card" style="position:sticky;top:16px;padding:14px;">
           <div class="card-hd"><span class="ic">💬</span> Coach</div>
-          <div class="chat-area" id="chatArea"><div class="chat-bubble chat-ai"><strong>I'm here.</strong> Vent, ask for help, or just need a "lock in" — I got you. 💪</div></div>
+          <div class="chat-area" id="chatArea"></div>
           <div class="chat-input-row"><input type="text" id="chatInput" placeholder="What's on your mind…"><button class="btn btn-fire btn-sm" onclick="sendChat()">Send</button></div>
           <div style="margin-top:10px;padding-top:10px;border-top:1px solid var(--border-light);">
             <div class="card-hd"><span class="ic">👑</span> Personal Bests</div>
@@ -401,6 +421,43 @@ let breakStartedAt=null,breakWorkStart=null,onBreak=false;
 const WORK_MS=25*60*1000,BREAK_MS=5*60*1000;
 function esc(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
 
+// ═══ DAILY QUOTE ═══
+const QUOTES=[
+  {text:'Whatever you do, work at it with all your heart, as working for the Lord, not for human masters.',ref:'Colossians 3:23'},
+  {text:'Commit to the Lord whatever you do, and He will establish your plans.',ref:'Proverbs 16:3'},
+  {text:'The plans of the diligent lead to profit as surely as haste leads to poverty.',ref:'Proverbs 21:5'},
+  {text:'Do not be slothful in zeal, be fervent in spirit, serve the Lord.',ref:'Romans 12:11'},
+  {text:'And let us not grow weary of doing good, for in due season we will reap, if we do not give up.',ref:'Galatians 6:9'},
+  {text:'The hand of the diligent will rule, while the slothful will be put to forced labor.',ref:'Proverbs 12:24'},
+  {text:'Whatever your hand finds to do, do it with your might.',ref:'Ecclesiastes 9:10'},
+  {text:'Be strong and courageous. Do not be afraid; do not be discouraged, for the Lord your God will be with you wherever you go.',ref:'Joshua 1:9'},
+  {text:'I can do all things through Christ who strengthens me.',ref:'Philippians 4:13'},
+  {text:'He who is faithful in a very little thing is faithful also in much.',ref:'Luke 16:10'},
+  {text:'The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.',ref:'Proverbs 13:4'},
+  {text:'For God gave us a spirit not of fear but of power and love and self-discipline.',ref:'2 Timothy 1:7'},
+  {text:'Iron sharpens iron, and one man sharpens another.',ref:'Proverbs 27:17'},
+  {text:'But those who hope in the Lord will renew their strength. They will soar on wings like eagles.',ref:'Isaiah 40:31'},
+  {text:'Let your light shine before others, that they may see your good deeds and glorify your Father in heaven.',ref:'Matthew 5:16'},
+  {text:'The Lord will fight for you; you need only to be still.',ref:'Exodus 14:14'},
+  {text:'In all your ways acknowledge Him, and He will make straight your paths.',ref:'Proverbs 3:6'},
+  {text:'For I know the plans I have for you, declares the Lord, plans to prosper you and not to harm you, plans to give you hope and a future.',ref:'Jeremiah 29:11'},
+  {text:'Be steadfast, immovable, always abounding in the work of the Lord, knowing that in the Lord your labor is not in vain.',ref:'1 Corinthians 15:58'},
+  {text:'Trust in the Lord with all your heart and lean not on your own understanding.',ref:'Proverbs 3:5'},
+  {text:'The Lord is my shepherd; I shall not want.',ref:'Psalm 23:1'},
+  {text:'Discipline yourself for the purpose of godliness.',ref:'1 Timothy 4:7'},
+  {text:'Not only so, but we also glory in our sufferings, because we know that suffering produces perseverance; perseverance, character; and character, hope.',ref:'Romans 5:3-4'},
+  {text:'Serve wholeheartedly, as if you were serving the Lord, not people.',ref:'Ephesians 6:7'},
+  {text:'The Lord is near to all who call on Him, to all who call on Him in truth.',ref:'Psalm 145:18'},
+  {text:'As each has received a gift, use it to serve one another, as good stewards of God\'s varied grace.',ref:'1 Peter 4:10'},
+  {text:'Be on your guard; stand firm in the faith; be courageous; be strong. Do everything in love.',ref:'1 Corinthians 16:13-14'},
+  {text:'The fear of the Lord is the beginning of wisdom, and knowledge of the Holy One is understanding.',ref:'Proverbs 9:10'},
+  {text:'He has shown you, O mortal, what is good. And what does the Lord require of you? To act justly and to love mercy and to walk humbly with your God.',ref:'Micah 6:8'},
+  {text:'No discipline seems pleasant at the time, but painful. Later on, however, it produces a harvest of righteousness and peace for those who have been trained by it.',ref:'Hebrews 12:11'},
+  {text:'Teach us to number our days, that we may gain a heart of wisdom.',ref:'Psalm 90:12'}
+];
+function renderQuote(){const dayOfYear=Math.floor((Date.now()-new Date(new Date().getFullYear(),0,0))/86400000);const q=QUOTES[dayOfYear%QUOTES.length];document.getElementById('quoteText').textContent=q.text;document.getElementById('quoteRef').textContent='— '+q.ref;document.getElementById('quoteBanner').style.display='block';}
+renderQuote();
+
 // ═══ NAV ═══
 function nav(id,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('sec-'+id).classList.add('active');document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('on'));btn.classList.add('on');if(id==='templates')renderMergedTemplates();if(id==='archive')renderArchive();}
 
@@ -423,11 +480,21 @@ function renderNudge(){const el=document.getElementById('metricsNudge');const y=
 function renderStats(){const gd=state.goals.filter(g=>g.done).length,nd=state.notes.filter(n=>n.done).length;document.getElementById('statsRow').innerHTML=`<div class="stat"><div class="stat-num" style="color:var(--fire);">${gd}/3</div><div class="stat-lbl">Goals</div></div><div class="stat"><div class="stat-num" style="color:var(--sky);">${nd}</div><div class="stat-lbl">Tasks</div></div><div class="stat"><div class="stat-num" style="color:var(--amber);">${state.metrics.dials||0}</div><div class="stat-lbl">Dials</div></div><div class="stat"><div class="stat-num" style="color:var(--emerald);">${state.metrics.talked||0}</div><div class="stat-lbl">Talked</div></div><div class="stat"><div class="stat-num" style="color:var(--violet);">${state.metrics.hw||0}</div><div class="stat-lbl">HW</div></div><div class="stat"><div class="stat-num" style="color:var(--rose);">${state.wins.length}</div><div class="stat-lbl">Wins</div></div>`;}
 function renderPB(){document.getElementById('pbGrid').innerHTML=`<div class="pb-item"><div class="pb-val">${profile.bestDials}</div><div class="pb-lbl">Most Dials</div></div><div class="pb-item"><div class="pb-val">${profile.bestTalked}</div><div class="pb-lbl">Most Talked</div></div><div class="pb-item"><div class="pb-val">${profile.bestTasks}</div><div class="pb-lbl">Most Tasks</div></div><div class="pb-item"><div class="pb-val">${profile.archive.length}</div><div class="pb-lbl">Days</div></div>`;}
 
+// ═══ NAME ═══
+function saveName(){const n=document.getElementById('userName').value.trim();if(!n)return;profile.userName=n;save();document.getElementById('nameScreen').style.display='none';showLockIn();}
+function showLockIn(){const name=profile.userName||'';document.getElementById('lockInScreen').style.display='block';document.getElementById('lockInGreeting').textContent=name?`Hey ${name}! What are your top 3 goals today? 🔥`:'What are your top 3 goals today? 🔥';}
+function getUserName(){return profile.userName||'there';}
+
+// ═══ INIT ═══
+if(state.lockedIn){showWS();}
+else if(!profile.userName){document.getElementById('nameScreen').style.display='block';}
+else{showLockIn();}
+
 // ═══ LOCK-IN ═══
 function lockIn(){const g1=document.getElementById('g1').value.trim(),g2=document.getElementById('g2').value.trim(),g3=document.getElementById('g3').value.trim();if(!g1||!g2||!g3){alert('Fill all 3!');return;}state.goals=[{text:g1,done:false},{text:g2,done:false},{text:g3,done:false}];state.lockedIn=true;save();showWS();}
-function showWS(){document.getElementById('lockInScreen').style.display='none';document.getElementById('workspace').style.display='block';renderAll();}
-function renderAll(){renderGoals();renderNotes();renderWins();renderPipelines();renderLeads();renderStats();renderPB();renderTags();renderTeamLeadSelect();loadMetrics();renderNudge();initBreakTimer();}
-if(state.lockedIn) showWS();
+function showWS(){document.getElementById('nameScreen').style.display='none';document.getElementById('lockInScreen').style.display='none';document.getElementById('workspace').style.display='block';renderAll();}
+function renderAll(){renderGoals();renderNotes();renderWins();renderPipelines();renderLeads();renderStats();renderPB();renderTags();renderTeamLeadSelect();loadMetrics();renderNudge();initBreakTimer();
+  document.getElementById('chatArea').innerHTML=`<div class="chat-bubble chat-ai"><strong>Hey ${esc(getUserName())}!</strong> I'm here. Vent, ask for help, or just need a "lock in" — I got you. 💪</div>`;}
 
 // ═══ END DAY ═══
 function endDay(){if(!confirm('End your day? This archives today and gives a fresh start.'))return;
@@ -511,7 +578,7 @@ function clearSelectedArchive(){const cbs=document.querySelectorAll('.archive-cb
 
 // ═══ CHAT ═══
 async function sendChat(){const inp=document.getElementById('chatInput'),t=inp.value.trim();if(!t)return;inp.value='';const chatEl=document.getElementById('chatArea');chatEl.innerHTML+=`<div class="chat-bubble chat-user">${esc(t)}</div><div class="chat-bubble chat-ai" id="typing" style="opacity:.5;"><em>Coach is typing...</em></div>`;chatEl.scrollTop=chatEl.scrollHeight;
-  try{const ctx=`Goals: ${state.goals.filter(g=>g.done).length}/3. Dials: ${state.metrics.dials}. Talked: ${state.metrics.talked}. HW: ${state.metrics.hw}. Wins: ${state.wins.length}. Pipelines: ${state.pipelines.length}.`;const resp=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,context:ctx})});const data=await resp.json();document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${data.reply||fallback(t)}</div>`;}catch(e){document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${fallback(t)}</div>`;}chatEl.scrollTop=chatEl.scrollHeight;}
+  try{const ctx=`User: ${getUserName()}. Goals: ${state.goals.filter(g=>g.done).length}/3. Dials: ${state.metrics.dials}. Talked: ${state.metrics.talked}. HW: ${state.metrics.hw}. Wins: ${state.wins.length}. Pipelines: ${state.pipelines.length}.`;const resp=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,context:ctx})});const data=await resp.json();document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${data.reply||fallback(t)}</div>`;}catch(e){document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${fallback(t)}</div>`;}chatEl.scrollTop=chatEl.scrollHeight;}
 function fallback(msg){const l=msg.toLowerCase(),gl=state.goals.filter(g=>!g.done).length,gd=3-gl,d=state.metrics.dials;if(l.match(/can'?t focus|distracted/))return`<strong>Close tabs. Phone down. 15 min.</strong> ${d} dials — let's add more. 🎯`;if(l.match(/break|tired|pause/))return`<strong>Take 5.</strong> Hit the break button. ⏸️`;if(l.match(/stressed|overwhelm|ugh/))return`<strong>I hear you.</strong> Next action only. ${gd}/3 done. One thing. 🫡`;if(l.match(/done|finished|crushed|boom/))return`<strong>LET'S GO 🔥</strong> ${gd}/3 goals, ${d} dials!`;return`<strong>${gd}/3 goals, ${d} dials.</strong> ${gl>0?'Next goal?':'Side tasks time!'}`;}
 document.getElementById('chatInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
 
@@ -540,6 +607,7 @@ function tickBreak(){const now=Date.now();if(onBreak){const el=now-breakStartedA
 function toggleBreak(){if(onBreak){onBreak=false;breakWorkStart=Date.now();document.getElementById('breakBar').classList.remove('on-break');document.getElementById('breakBtn').textContent='Take Break';}else{onBreak=true;breakStartedAt=Date.now();document.getElementById('breakBar').classList.add('on-break');document.getElementById('breakBtn').textContent='Skip';}}
 if('Notification' in window&&Notification.permission==='default')Notification.requestPermission();
 ['g1','g2','g3'].forEach((id,i)=>{document.getElementById(id)?.addEventListener('keydown',e=>{if(e.key==='Enter'){if(i<2)document.getElementById(`g${i+2}`).focus();else lockIn();}});});
+document.getElementById('userName')?.addEventListener('keydown',e=>{if(e.key==='Enter')saveName();});
 </script>
 </body>
 </html>

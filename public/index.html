@@ -394,10 +394,13 @@ const PIP_STEPS_OFFICE=[{name:'Phone / Group Interview',desc:'Initial screening'
 
 let state=JSON.parse(localStorage.getItem('pdc7_state')||'null');
 let profile=JSON.parse(localStorage.getItem('pdc7_profile')||'null');
-if(!profile) profile={bestDials:0,bestDialsDate:'',bestTalked:0,bestTalkedDate:'',bestTasks:0,bestTasksDate:'',tags:[...DEFAULT_TAGS],teamLeads:[...DEFAULT_TEAM_LEADS],templates:[...DEFAULT_TEMPLATES],archive:[]};
+if(!profile) profile={bestDials:0,bestDialsDate:'',bestTalked:0,bestTalkedDate:'',bestTasks:0,bestTasksDate:'',tags:[...DEFAULT_TAGS],teamLeads:[...DEFAULT_TEAM_LEADS],templates:[...DEFAULT_TEMPLATES],archive:[],pipelines:[]};
 if(!profile.tags) profile.tags=[...DEFAULT_TAGS];
 if(!profile.teamLeads) profile.teamLeads=[...DEFAULT_TEAM_LEADS];
 if(!profile.templates) profile.templates=[...DEFAULT_TEMPLATES];
+// Migrate pipelines from state to profile if needed
+if(!profile.pipelines) profile.pipelines=[];
+if(state&&state.pipelines&&state.pipelines.length&&!profile.pipelines.length){profile.pipelines=state.pipelines;}
 
 if(!state||state.date!==TODAY){
   if(state&&state.date&&state.lockedIn){
@@ -409,11 +412,10 @@ if(!state||state.date!==TODAY){
     const td=(state.goals||[]).filter(g=>g.done).length+(state.notes||[]).filter(n=>n.done).length;
     if(td>profile.bestTasks){profile.bestTasks=td;profile.bestTasksDate=state.date;}
   }
-  state={date:TODAY,goals:[],notes:[],wins:[],pipelines:state?.pipelines||[],leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};
+  state={date:TODAY,goals:[],notes:[],wins:[],leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};
 }
 if(!state.leads) state.leads=[];
 if(!state.metrics) state.metrics={dials:0,talked:0,hw:0,rejected:0};
-if(!state.pipelines) state.pipelines=[];
 if(!state.wins) state.wins=[];
 
 function save(){localStorage.setItem('pdc7_state',JSON.stringify(state));localStorage.setItem('pdc7_profile',JSON.stringify(profile));}
@@ -501,7 +503,7 @@ function endDay(){if(!confirm('End your day? This archives today and gives a fre
   profile.archive.push({...state});if(profile.archive.length>60)profile.archive.shift();
   const m=state.metrics||{};if((m.dials||0)>profile.bestDials){profile.bestDials=m.dials;profile.bestDialsDate=state.date;}if((m.talked||0)>profile.bestTalked){profile.bestTalked=m.talked;profile.bestTalkedDate=state.date;}
   const td=(state.goals||[]).filter(g=>g.done).length+(state.notes||[]).filter(n=>n.done).length;if(td>profile.bestTasks){profile.bestTasks=td;profile.bestTasksDate=state.date;}
-  showEOD();const kp=state.pipelines||[];state={date:'ENDED',goals:[],notes:[],wins:[],pipelines:kp,leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};save();
+  showEOD();state={date:'ENDED',goals:[],notes:[],wins:[],leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};save();
   const em=document.getElementById('eodModal');const btns=em.querySelector('div:last-child');if(btns)btns.innerHTML=`<button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-fire" onclick="localStorage.removeItem('pdc7_state');location.reload();">🔄 Fresh Start</button>`;}
 
 // ═══ GOALS ═══
@@ -523,11 +525,11 @@ function addLead(){const n=document.getElementById('leadName').value.trim(),note
 function addPipeline(){const n=document.getElementById('pipName').value.trim();if(!n){alert('Name required');return;}
   const role=document.getElementById('pipRole').value.trim()||'—';const ptype=document.getElementById('pipType').value;
   const tlName=document.getElementById('pipTeamLead').value;const tl=profile.teamLeads.find(t=>t.name===tlName);
-  state.pipelines.push({id:Date.now(),name:n,email:document.getElementById('pipEmail').value.trim(),phone:document.getElementById('pipPhone').value.trim(),role:role,ptype:ptype,teamLead:tlName,teamLeadPhone:tl?tl.phone:'',trDate:document.getElementById('pipTRDate').value,trTime:document.getElementById('pipTRTime').value,location:document.getElementById('pipLocation').value.trim(),notes:document.getElementById('pipNotes').value.trim(),steps:(ptype==='sales'?PIP_STEPS_SALES:PIP_STEPS_OFFICE).map(s=>({...s,done:false})),expanded:false});
+  profile.pipelines.push({id:Date.now(),name:n,email:document.getElementById('pipEmail').value.trim(),phone:document.getElementById('pipPhone').value.trim(),role:role,ptype:ptype,teamLead:tlName,teamLeadPhone:tl?tl.phone:'',trDate:document.getElementById('pipTRDate').value,trTime:document.getElementById('pipTRTime').value,location:document.getElementById('pipLocation').value.trim(),notes:document.getElementById('pipNotes').value.trim(),steps:(ptype==='sales'?PIP_STEPS_SALES:PIP_STEPS_OFFICE).map(s=>({...s,done:false})),expanded:false});
   save();['pipName','pipEmail','pipPhone','pipRole','pipTeamLead','pipTRDate','pipTRTime','pipLocation','pipNotes'].forEach(id=>{const e=document.getElementById(id);if(e)e.value='';});document.getElementById('pipFormWrap').style.display='none';document.getElementById('pipAddBtn').style.display='block';renderPipelines();}
 
-function renderPipelines(){const el=document.getElementById('pipelineList');if(!state.pipelines.length){el.innerHTML='<div class="empty-msg">No active pipelines</div>';renderPipStats();renderCandidateSelect();return;}
-  el.innerHTML=state.pipelines.map((p,pi)=>{const dn=p.steps.filter(s=>s.done).length,pct=Math.round(dn/p.steps.length*100),nx=p.steps.findIndex(s=>!s.done);
+function renderPipelines(){const el=document.getElementById('pipelineList');if(!profile.pipelines.length){el.innerHTML='<div class="empty-msg">No active pipelines</div>';renderPipStats();renderCandidateSelect();return;}
+  el.innerHTML=profile.pipelines.map((p,pi)=>{const dn=p.steps.filter(s=>s.done).length,pct=Math.round(dn/p.steps.length*100),nx=p.steps.findIndex(s=>!s.done);
     const isSales=(p.ptype||'sales')==='sales';
     const salesStages=['Dialing','Screening','HW Sent','HW Review','TR Sched','TR Kit','Cal Invite','Waivers','Pre-TR','✅ Done'];
     const officeStages=['Interview','Cal Invite','1-on-1','Cal Invite','Final','Offer','Paperwork','Orientation','Training','✅ Done'];
@@ -535,13 +537,13 @@ function renderPipelines(){const el=document.getElementById('pipelineList');if(!
     const info=[];if(p.email)info.push(`📧 ${esc(p.email)}`);if(p.phone)info.push(`📞 ${esc(p.phone)}`);if(p.role&&p.role!=='—')info.push(`💼 ${esc(p.role)}`);if(p.teamLead)info.push(`👤 ${esc(p.teamLead)}`);if(p.trDate)info.push(`📅 ${p.trDate}`);if(p.trTime)info.push(`⏰ ${p.trTime}`);if(p.location)info.push(`📍 ${esc(p.location)}`);
     return `<div class="pipeline-card"><div class="pipeline-header" onclick="togglePip(${pi})"><h4>${esc(p.name)} <span class="pip-pct">${pct}%</span> <span style="font-size:.55rem;padding:1px 6px;border-radius:6px;background:${dn>=p.steps.length?'var(--emerald-light)':'var(--amber-light)'};color:${dn>=p.steps.length?'var(--emerald)':'var(--amber)'};font-weight:600;">${stage}</span> <span style="font-size:.5rem;padding:1px 5px;border-radius:6px;background:${isSales?'var(--fire-light)':'var(--sky-light)'};color:${isSales?'var(--fire)':'var(--sky)'};font-weight:600;">${isSales?'🏃 Sales':'🏢 Office'}</span></h4><div style="display:flex;gap:4px;align-items:center;"><button class="pip-del" onclick="event.stopPropagation();if(confirm('Remove?'))delPip(${pi})">✕</button><span class="pip-arrow ${p.expanded?'open':''}">▶</span></div></div>${info.length?`<div class="pip-info-row">${info.join(' ')}</div>`:''}${p.notes?`<div style="font-size:.62rem;color:var(--text-dim);margin-bottom:4px;padding:3px 6px;background:var(--bg2);border-radius:4px;">📝 ${esc(p.notes)}</div>`:''}
     <div class="pipeline-progress">${p.steps.map((s,si)=>`<div class="pip-dot ${s.done?'done':si===nx?'active':''}"></div>`).join('')}</div><div class="pipeline-steps ${p.expanded?'open':''}">${p.steps.map((s,si)=>`<div class="pip-step"><div class="pip-step-check ${s.done?'done':''}" onclick="togPipStep(${pi},${si})"></div><div class="pip-step-info"><div class="pip-step-name ${s.done?'struck':''}">${s.name}</div><div class="pip-step-desc">${s.desc}</div>${s.tool?`<span class="pip-step-tool">${s.tool}</span>`:''}</div></div>`).join('')}</div></div>`;}).join('');renderPipStats();renderCandidateSelect();}
-function togglePip(pi){state.pipelines[pi].expanded=!state.pipelines[pi].expanded;save();renderPipelines();}
-function togPipStep(pi,si){state.pipelines[pi].steps[si].done=!state.pipelines[pi].steps[si].done;save();renderPipelines();}
-function delPip(pi){state.pipelines.splice(pi,1);save();renderPipelines();}
-function renderPipStats(){const el=document.getElementById('pipStats');const a=state.pipelines.length,c=state.pipelines.filter(p=>p.steps.every(s=>s.done)).length;el.innerHTML=`<div style="display:flex;gap:20px;justify-content:center;padding:8px;"><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--fire);">${a}</div><div style="font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Active</div></div><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--emerald);">${c}</div><div style="font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Done</div></div></div>`;}
+function togglePip(pi){profile.pipelines[pi].expanded=!profile.pipelines[pi].expanded;save();renderPipelines();}
+function togPipStep(pi,si){profile.pipelines[pi].steps[si].done=!profile.pipelines[pi].steps[si].done;save();renderPipelines();}
+function delPip(pi){profile.pipelines.splice(pi,1);save();renderPipelines();}
+function renderPipStats(){const el=document.getElementById('pipStats');const a=profile.pipelines.length,c=profile.pipelines.filter(p=>p.steps.every(s=>s.done)).length;el.innerHTML=`<div style="display:flex;gap:20px;justify-content:center;padding:8px;"><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--fire);">${a}</div><div style="font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Active</div></div><div style="text-align:center;"><div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:var(--emerald);">${c}</div><div style="font-size:.5rem;text-transform:uppercase;letter-spacing:.1em;color:var(--text-dim);font-weight:600;">Done</div></div></div>`;}
 
 // ═══ CANDIDATE SELECT (for mail merge) ═══
-function renderCandidateSelect(){const el=document.getElementById('mergeCandidate');if(!el)return;el.innerHTML='<option value="">— Select candidate —</option>'+state.pipelines.map((p,i)=>`<option value="${i}">${esc(p.name)}${p.role&&p.role!=='—'?' — '+esc(p.role):''}</option>`).join('');}
+function renderCandidateSelect(){const el=document.getElementById('mergeCandidate');if(!el)return;el.innerHTML='<option value="">— Select candidate —</option>'+profile.pipelines.map((p,i)=>`<option value="${i}">${esc(p.name)}${p.role&&p.role!=='—'?' — '+esc(p.role):''}</option>`).join('');}
 
 // ═══ WINS ═══
 function renderWins(){const el=document.getElementById('winsList');if(!state.wins.length){el.innerHTML='<div class="empty-msg">No wins yet 🏆</div>';return;}el.innerHTML=state.wins.map((w,i)=>`<div class="win-item"><button class="win-del" onclick="delWin(${i})">✕</button><div class="win-title">${esc(w.title)}</div><div class="win-meta"><span class="tag-color" style="${getTagStyle(w.cat)}">${w.cat}</span><span class="win-time">${w.time||''}</span></div>${w.steps?.length?`<div class="win-steps">${w.steps.map((s,j)=>`<div class="win-step"><div class="win-step-num">${j+1}</div><span>${esc(s)}</span></div>`).join('')}</div>`:''}</div>`).join('');}
@@ -557,7 +559,7 @@ function showNewTplForm(){document.getElementById('newTplForm').style.display='b
 function saveNewTpl(){const title=document.getElementById('newTplTitle').value.trim(),body=document.getElementById('newTplBody').value.trim();if(!title||!body)return;profile.templates.push({id:Date.now(),title,body});save();document.getElementById('newTplTitle').value='';document.getElementById('newTplBody').value='';document.getElementById('newTplForm').style.display='none';renderMergedTemplates();}
 function deleteTpl(id){profile.templates=profile.templates.filter(t=>t.id!==id);save();renderMergedTemplates();}
 function mergeTemplate(body,candidate){if(!candidate)return body;return body.replace(/\{candidate_name\}/g,candidate.name||'').replace(/\{candidate_email\}/g,candidate.email||'').replace(/\{candidate_phone\}/g,candidate.phone||'').replace(/\{job_title\}/g,candidate.role||'').replace(/\{team_lead_name\}/g,candidate.teamLead||'').replace(/\{team_lead_phone\}/g,candidate.teamLeadPhone||'').replace(/\{tr_date\}/g,candidate.trDate||'').replace(/\{tr_time\}/g,candidate.trTime||'').replace(/\{location\}/g,candidate.location||'').replace(/\{candidate_notes\}/g,candidate.notes||'');}
-function renderMergedTemplates(){const el=document.getElementById('tplList');const ci=document.getElementById('mergeCandidate')?.value;const candidate=ci!==''&&ci!==undefined?state.pipelines[parseInt(ci)]:null;
+function renderMergedTemplates(){const el=document.getElementById('tplList');const ci=document.getElementById('mergeCandidate')?.value;const candidate=ci!==''&&ci!==undefined?profile.pipelines[parseInt(ci)]:null;
   el.innerHTML=profile.templates.map(t=>{const merged=mergeTemplate(t.body,candidate);return `<div class="tpl-item"><h5>${esc(t.title)} ${t.id>7?`<span style="font-size:.55rem;color:var(--fire);cursor:pointer;margin-left:6px;" onclick="deleteTpl(${t.id})">🗑 delete</span>`:''}</h5><div class="tpl-body">${esc(merged)}</div><button class="btn btn-ghost btn-sm" onclick="copyTplText(this)">📋 Copy</button></div>`;}).join('');}
 function copyTplText(btn){navigator.clipboard.writeText(btn.previousElementSibling.textContent.trim()).then(()=>{btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);});}
 
@@ -578,7 +580,7 @@ function clearSelectedArchive(){const cbs=document.querySelectorAll('.archive-cb
 
 // ═══ CHAT ═══
 async function sendChat(){const inp=document.getElementById('chatInput'),t=inp.value.trim();if(!t)return;inp.value='';const chatEl=document.getElementById('chatArea');chatEl.innerHTML+=`<div class="chat-bubble chat-user">${esc(t)}</div><div class="chat-bubble chat-ai" id="typing" style="opacity:.5;"><em>Coach is typing...</em></div>`;chatEl.scrollTop=chatEl.scrollHeight;
-  try{const ctx=`User: ${getUserName()}. Goals: ${state.goals.filter(g=>g.done).length}/3. Dials: ${state.metrics.dials}. Talked: ${state.metrics.talked}. HW: ${state.metrics.hw}. Wins: ${state.wins.length}. Pipelines: ${state.pipelines.length}.`;const resp=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,context:ctx})});const data=await resp.json();document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${data.reply||fallback(t)}</div>`;}catch(e){document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${fallback(t)}</div>`;}chatEl.scrollTop=chatEl.scrollHeight;}
+  try{const ctx=`User: ${getUserName()}. Goals: ${state.goals.filter(g=>g.done).length}/3. Dials: ${state.metrics.dials}. Talked: ${state.metrics.talked}. HW: ${state.metrics.hw}. Wins: ${state.wins.length}. Pipelines: ${profile.pipelines.length}.`;const resp=await fetch('/api/coach',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:t,context:ctx})});const data=await resp.json();document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${data.reply||fallback(t)}</div>`;}catch(e){document.getElementById('typing')?.remove();chatEl.innerHTML+=`<div class="chat-bubble chat-ai">${fallback(t)}</div>`;}chatEl.scrollTop=chatEl.scrollHeight;}
 function fallback(msg){const l=msg.toLowerCase(),gl=state.goals.filter(g=>!g.done).length,gd=3-gl,d=state.metrics.dials;if(l.match(/can'?t focus|distracted/))return`<strong>Close tabs. Phone down. 15 min.</strong> ${d} dials — let's add more. 🎯`;if(l.match(/break|tired|pause/))return`<strong>Take 5.</strong> Hit the break button. ⏸️`;if(l.match(/stressed|overwhelm|ugh/))return`<strong>I hear you.</strong> Next action only. ${gd}/3 done. One thing. 🫡`;if(l.match(/done|finished|crushed|boom/))return`<strong>LET'S GO 🔥</strong> ${gd}/3 goals, ${d} dials!`;return`<strong>${gd}/3 goals, ${d} dials.</strong> ${gl>0?'Next goal?':'Side tasks time!'}`;}
 document.getElementById('chatInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
 
@@ -587,7 +589,7 @@ function showEOD(){const m=document.getElementById('eodModal');const ds=new Date
   let h=`<h2>EOD Report</h2><pre style="background:var(--bg);padding:14px;border-radius:var(--radius-sm);font-family:'Sora',sans-serif;font-size:.75rem;line-height:1.7;white-space:pre-wrap;border:1px solid var(--border-light);">EOD – ${ds}\n\nTotal Dials: ${mt.dials||0}\nTalked To (excluding reschedules): ${mt.talked||0}\nRejected / Unqualified: ${mt.rejected||0}\n`;
   if(state.leads.length){h+=`\nQualified Lead:\n`;state.leads.forEach(l=>{h+=`● ${esc(l.name)} – ${esc(l.note)}\n`;});}
   if(mt.hw>0)h+=`\nHomework Sent: ${mt.hw}\n`;
-  const ap=state.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){h+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);h+=`● ${esc(p.name)}${nx?' – '+nx.name:''}\n`;});}
+  const ap=profile.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){h+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);h+=`● ${esc(p.name)}${nx?' – '+nx.name:''}\n`;});}
   const ot=[...gd.map(g=>g.text),...nd.map(n=>n.text)];if(ot.length){h+=`\nOther Tasks:\n`;ot.forEach(t=>{h+=`● ${esc(t)}\n`;});}
   h+=`</pre><div style="display:flex;gap:6px;margin-top:12px;"><button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-ghost" onclick="closeEOD()">Close</button></div>`;
   m.innerHTML=h;document.getElementById('eodOverlay').classList.add('show');}
@@ -596,7 +598,7 @@ function copyEOD(){const ds=new Date().toLocaleDateString('en-US',{month:'short'
   let r=`EOD – ${ds}\n\nTotal Dials: ${mt.dials||0}\nTalked To (excluding reschedules): ${mt.talked||0}\nRejected / Unqualified: ${mt.rejected||0}\n`;
   if(state.leads.length){r+=`\nQualified Lead:\n`;state.leads.forEach(l=>{r+=`● ${l.name} – ${l.note}\n`;});}
   if(mt.hw>0)r+=`\nHomework Sent: ${mt.hw}\n`;
-  const ap=state.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){r+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);r+=`● ${p.name}${nx?' – '+nx.name:''}\n`;});}
+  const ap=profile.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){r+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);r+=`● ${p.name}${nx?' – '+nx.name:''}\n`;});}
   const ot=[...gd.map(g=>g.text),...nd.map(n=>n.text)];if(ot.length){r+=`\nOther Tasks:\n`;ot.forEach(t=>{r+=`● ${t}\n`;});}
   navigator.clipboard.writeText(r).then(()=>{const btn=document.querySelector('.eod-modal .btn-amber');if(btn){btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);}});}
 document.getElementById('eodOverlay')?.addEventListener('click',function(e){if(e.target===this)closeEOD();});

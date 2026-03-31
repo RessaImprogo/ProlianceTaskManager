@@ -479,7 +479,7 @@ function loadMetrics(){document.getElementById('mDials').value=state.metrics.dia
 function renderNudge(){const el=document.getElementById('metricsNudge');const y=profile.archive.length?profile.archive[profile.archive.length-1]:null;const yd=y?.metrics?.dials||0;const td=state.metrics.dials||0;if(yd>0&&td>0){if(td>yd)el.textContent=`🔥 ${td} dials vs ${yd} yesterday — ahead!`;else if(td===yd)el.textContent=`⚡ Tied with yesterday at ${td}. One more!`;else el.textContent=`📞 ${td} so far — ${yd} yesterday. ${yd-td+1} more to beat it!`;}else if(td>0)el.textContent=`📞 ${td} dials.${profile.bestDials>td?` PB: ${profile.bestDials}`:' Setting pace!'}`;else el.textContent='';}
 
 // ═══ STATS ═══
-function renderStats(){const gd=state.goals.filter(g=>g.done).length,nd=state.notes.filter(n=>n.done).length;document.getElementById('statsRow').innerHTML=`<div class="stat"><div class="stat-num" style="color:var(--fire);">${gd}/3</div><div class="stat-lbl">Goals</div></div><div class="stat"><div class="stat-num" style="color:var(--sky);">${nd}</div><div class="stat-lbl">Tasks</div></div><div class="stat"><div class="stat-num" style="color:var(--amber);">${state.metrics.dials||0}</div><div class="stat-lbl">Dials</div></div><div class="stat"><div class="stat-num" style="color:var(--emerald);">${state.metrics.talked||0}</div><div class="stat-lbl">Talked</div></div><div class="stat"><div class="stat-num" style="color:var(--violet);">${state.metrics.hw||0}</div><div class="stat-lbl">HW</div></div><div class="stat"><div class="stat-num" style="color:var(--rose);">${state.wins.length}</div><div class="stat-lbl">Wins</div></div>`;}
+function renderStats(){const gd=state.goals.filter(g=>g.done).length,gt=state.goals.length,nd=state.notes.filter(n=>n.done).length;document.getElementById('statsRow').innerHTML=`<div class="stat"><div class="stat-num" style="color:var(--fire);">${gd}/${gt}</div><div class="stat-lbl">Goals</div></div><div class="stat"><div class="stat-num" style="color:var(--sky);">${nd}</div><div class="stat-lbl">Tasks</div></div><div class="stat"><div class="stat-num" style="color:var(--amber);">${state.metrics.dials||0}</div><div class="stat-lbl">Dials</div></div><div class="stat"><div class="stat-num" style="color:var(--emerald);">${state.metrics.talked||0}</div><div class="stat-lbl">Talked</div></div><div class="stat"><div class="stat-num" style="color:var(--violet);">${state.metrics.hw||0}</div><div class="stat-lbl">HW</div></div><div class="stat"><div class="stat-num" style="color:var(--rose);">${state.wins.length}</div><div class="stat-lbl">Wins</div></div>`;}
 function renderPB(){document.getElementById('pbGrid').innerHTML=`<div class="pb-item"><div class="pb-val">${profile.bestDials}</div><div class="pb-lbl">Most Dials</div></div><div class="pb-item"><div class="pb-val">${profile.bestTalked}</div><div class="pb-lbl">Most Talked</div></div><div class="pb-item"><div class="pb-val">${profile.bestTasks}</div><div class="pb-lbl">Most Tasks</div></div><div class="pb-item"><div class="pb-val">${profile.archive.length}</div><div class="pb-lbl">Days</div></div>`;}
 
 // ═══ NAME ═══
@@ -493,7 +493,7 @@ else if(!profile.userName){document.getElementById('nameScreen').style.display='
 else{showLockIn();}
 
 // ═══ LOCK-IN ═══
-function lockIn(){const g1=document.getElementById('g1').value.trim(),g2=document.getElementById('g2').value.trim(),g3=document.getElementById('g3').value.trim();if(!g1||!g2||!g3){alert('Fill all 3!');return;}state.goals=[{text:g1,done:false},{text:g2,done:false},{text:g3,done:false}];state.lockedIn=true;save();showWS();}
+function lockIn(){const g1=document.getElementById('g1').value.trim(),g2=document.getElementById('g2').value.trim(),g3=document.getElementById('g3').value.trim();if(!g1){alert('Enter at least 1 goal!');return;}const goals=[{text:g1,done:false}];if(g2)goals.push({text:g2,done:false});if(g3)goals.push({text:g3,done:false});state.goals=goals;state.lockedIn=true;save();showWS();}
 function showWS(){document.getElementById('nameScreen').style.display='none';document.getElementById('lockInScreen').style.display='none';document.getElementById('workspace').style.display='block';renderAll();}
 function renderAll(){renderGoals();renderNotes();renderWins();renderPipelines();renderLeads();renderStats();renderPB();renderTags();renderTeamLeadSelect();loadMetrics();renderNudge();initBreakTimer();
   document.getElementById('chatArea').innerHTML=`<div class="chat-bubble chat-ai"><strong>Hey ${esc(getUserName())}!</strong> I'm here. Vent, ask for help, or just need a "lock in" — I got you. 💪</div>`;}
@@ -507,7 +507,7 @@ function endDay(){if(!confirm('End your day? This archives today and gives a fre
   const em=document.getElementById('eodModal');const btns=em.querySelector('div:last-child');if(btns)btns.innerHTML=`<button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-fire" onclick="localStorage.removeItem('pdc7_state');location.reload();">🔄 Fresh Start</button>`;}
 
 // ═══ GOALS ═══
-function renderGoals(){const el=document.getElementById('goalsContainer'),dn=state.goals.filter(g=>g.done).length;document.getElementById('progressArc').setAttribute('stroke-dashoffset',144.5-(144.5*dn/3));document.getElementById('progressText').textContent=`${dn}/3`;el.innerHTML=state.goals.map((g,i)=>`<div class="goal-item ${g.done?'completed':''}" id="goal-${i}" onclick="togGoal(${i})"><div class="goal-check ${g.done?'done':''}"></div><h3>${esc(g.text)}</h3></div>`).join('');}
+function renderGoals(){const el=document.getElementById('goalsContainer'),tot=state.goals.length,dn=state.goals.filter(g=>g.done).length;document.getElementById('progressArc').setAttribute('stroke-dashoffset',tot?144.5-(144.5*dn/tot):144.5);document.getElementById('progressText').textContent=`${dn}/${tot}`;el.innerHTML=state.goals.map((g,i)=>`<div class="goal-item ${g.done?'completed':''}" id="goal-${i}" onclick="togGoal(${i})"><div class="goal-check ${g.done?'done':''}"></div><h3>${esc(g.text)}</h3></div>`).join('');}
 function togGoal(i){state.goals[i].done=!state.goals[i].done;if(state.goals[i].done)spawnConfetti(document.getElementById(`goal-${i}`));save();renderGoals();renderStats();}
 function spawnConfetti(el){const b=document.createElement('div');b.className='confetti-burst';const c=['var(--fire)','var(--emerald)','var(--sky)','var(--amber)','var(--violet)','var(--rose)'];for(let i=0;i<12;i++){const p=document.createElement('div');p.className='confetti-piece';const a=(i/12)*Math.PI*2,d=40+Math.random()*30;p.style.cssText=`background:${c[i%c.length]};width:${3+Math.random()*3}px;height:${3+Math.random()*4}px;--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d}px;--rot:${Math.random()*360}deg;animation-delay:${Math.random()*.1}s;`;b.appendChild(p);}el.appendChild(b);setTimeout(()=>b.remove(),900);}
 
@@ -566,13 +566,13 @@ function copyTplText(btn){navigator.clipboard.writeText(btn.previousElementSibli
 // ═══ ARCHIVE (Weekly Sun-Sat) ═══
 function getWeekRange(dateStr){const d=new Date(dateStr);const day=d.getDay();const sun=new Date(d);sun.setDate(d.getDate()-day);const sat=new Date(sun);sat.setDate(sun.getDate()+6);return {start:sun.toDateString(),end:sat.toDateString(),label:`${sun.toLocaleDateString('en-US',{month:'short',day:'numeric'})} – ${sat.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})}`};}
 function renderArchive(){const el=document.getElementById('archiveContent');if(!profile.archive.length){el.innerHTML='<div class="empty-msg">No archived days yet. Click "End Day" to archive.</div>';return;}
-  // Group by week
   const weeks={};profile.archive.forEach((a,i)=>{const w=getWeekRange(a.date);if(!weeks[w.label])weeks[w.label]={range:w,days:[],indices:[]};weeks[w.label].days.push(a);weeks[w.label].indices.push(i);});
   let h='';Object.values(weeks).reverse().forEach(week=>{
-    const totals={dials:0,talked:0,hw:0,rejected:0};week.days.forEach(d=>{const m=d.metrics||{};totals.dials+=m.dials||0;totals.talked+=m.talked||0;totals.hw+=m.hw||0;totals.rejected+=m.rejected||0;});
-    h+=`<div class="archive-week-total"><h3>📊 Week: ${week.range.label}</h3><div class="a-metrics"><span>📞 Dials: <strong>${totals.dials}</strong></span><span>🗣 Talked: <strong>${totals.talked}</strong></span><span>📧 HW Sent: <strong>${totals.hw}</strong></span><span>❌ Rejected: <strong>${totals.rejected}</strong></span><span>📅 Days: <strong>${week.days.length}</strong></span></div></div>`;
-    week.days.forEach((d,di)=>{const m=d.metrics||{};const gd=(d.goals||[]).filter(g=>g.done).length;const dt=new Date(d.date).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
-      h+=`<div class="archive-day"><h4><span>${dt} — ${gd}/3 goals</span><label style="font-size:.6rem;"><input type="checkbox" class="archive-cb" data-idx="${week.indices[di]}" style="width:auto;margin-right:3px;">select</label></h4><div class="a-metrics"><span>📞 ${m.dials||0}</span><span>🗣 ${m.talked||0}</span><span>📧 ${m.hw||0}</span><span>❌ ${m.rejected||0}</span><span>🏆 ${(d.wins||[]).length} wins</span></div></div>`;
+    const totals={dials:0,talked:0,hw:0,rejected:0,leads:0};week.days.forEach(d=>{const m=d.metrics||{};totals.dials+=m.dials||0;totals.talked+=m.talked||0;totals.hw+=m.hw||0;totals.rejected+=m.rejected||0;totals.leads+=(d.leads||[]).length;});
+    h+=`<div class="archive-week-total"><h3>📊 Week: ${week.range.label}</h3><div class="a-metrics"><span>📞 Dials: <strong>${totals.dials}</strong></span><span>🗣 Talked: <strong>${totals.talked}</strong></span><span>📧 HW: <strong>${totals.hw}</strong></span><span>❌ Rejected: <strong>${totals.rejected}</strong></span><span>⭐ Leads: <strong>${totals.leads}</strong></span><span>📅 Days: <strong>${week.days.length}</strong></span></div></div>`;
+    week.days.forEach((d,di)=>{const m=d.metrics||{};const gt=(d.goals||[]).length;const gd=(d.goals||[]).filter(g=>g.done).length;const lc=(d.leads||[]).length;const dt=new Date(d.date).toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});
+      const leadNames=(d.leads||[]).map(l=>l.name).join(', ');
+      h+=`<div class="archive-day"><h4><span>${dt} — ${gd}/${gt} goals</span><label style="font-size:.6rem;"><input type="checkbox" class="archive-cb" data-idx="${week.indices[di]}" style="width:auto;margin-right:3px;">select</label></h4><div class="a-metrics"><span>📞 ${m.dials||0}</span><span>🗣 ${m.talked||0}</span><span>📧 ${m.hw||0}</span><span>❌ ${m.rejected||0}</span><span>🏆 ${(d.wins||[]).length} wins</span>${lc?`<span>⭐ ${lc} lead${lc>1?'s':''}: ${leadNames}</span>`:''}</div></div>`;
     });
   });
   el.innerHTML=h;}
@@ -585,22 +585,20 @@ function fallback(msg){const l=msg.toLowerCase(),gl=state.goals.filter(g=>!g.don
 document.getElementById('chatInput')?.addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
 
 // ═══ EOD ═══
-function showEOD(){const m=document.getElementById('eodModal');const ds=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});const mt=state.metrics;const gd=state.goals.filter(g=>g.done),nd=state.notes.filter(n=>n.done);
-  let h=`<h2>EOD Report</h2><pre style="background:var(--bg);padding:14px;border-radius:var(--radius-sm);font-family:'Sora',sans-serif;font-size:.75rem;line-height:1.7;white-space:pre-wrap;border:1px solid var(--border-light);">EOD – ${ds}\n\nTotal Dials: ${mt.dials||0}\nTalked To (excluding reschedules): ${mt.talked||0}\nRejected / Unqualified: ${mt.rejected||0}\n`;
-  if(state.leads.length){h+=`\nQualified Lead:\n`;state.leads.forEach(l=>{h+=`● ${esc(l.name)} – ${esc(l.note)}\n`;});}
-  if(mt.hw>0)h+=`\nHomework Sent: ${mt.hw}\n`;
-  const ap=profile.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){h+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);h+=`● ${esc(p.name)}${nx?' – '+nx.name:''}\n`;});}
-  const ot=[...gd.map(g=>g.text),...nd.map(n=>n.text)];if(ot.length){h+=`\nOther Tasks:\n`;ot.forEach(t=>{h+=`● ${esc(t)}\n`;});}
-  h+=`</pre><div style="display:flex;gap:6px;margin-top:12px;"><button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-ghost" onclick="closeEOD()">Close</button></div>`;
+function buildEODText(){const ds=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});const mt=state.metrics;const gd=state.goals.filter(g=>g.done),nd=state.notes.filter(n=>n.done);
+  let r=`EOD – ${ds}\n\nDials: ${mt.dials||0}\nTalked To (excluding reschedules): ${mt.talked||0}\nRejected: ${mt.rejected||0}\nHomework Sent: ${mt.hw||0}\n`;
+  if(state.leads.length){r+=`\nQualified Lead:\n`;state.leads.forEach(l=>{r+=`● ${l.name} – ${l.note}\n`;});}
+  const ap=state.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){r+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);r+=`● ${p.name}${nx?' – '+nx.name:''}\n`;});}
+  // Categorize other tasks (goals + side tasks by tag)
+  const allTasks=[...gd.map(g=>({text:g.text,cat:'Goals'})),...nd.map(n=>({text:n.text,cat:n.cat}))];
+  if(allTasks.length){r+=`\nOther Tasks:\n`;const cats={};allTasks.forEach(t=>{if(!cats[t.cat])cats[t.cat]=[];cats[t.cat].push(t.text);});Object.entries(cats).forEach(([cat,tasks])=>{r+=`[${cat}]\n`;tasks.forEach(t=>{r+=`● ${t}\n`;});});}
+  return r;}
+function showEOD(){const m=document.getElementById('eodModal');const txt=buildEODText();
+  let h=`<h2>EOD Report</h2><pre style="background:var(--bg);padding:14px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:.75rem;line-height:1.7;white-space:pre-wrap;border:1px solid var(--border-light);">${esc(txt)}</pre>`;
+  h+=`<div style="display:flex;gap:6px;margin-top:12px;"><button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-ghost" onclick="closeEOD()">Close</button></div>`;
   m.innerHTML=h;document.getElementById('eodOverlay').classList.add('show');}
 function closeEOD(){document.getElementById('eodOverlay').classList.remove('show');}
-function copyEOD(){const ds=new Date().toLocaleDateString('en-US',{month:'short',day:'numeric'});const mt=state.metrics,gd=state.goals.filter(g=>g.done),nd=state.notes.filter(n=>n.done);
-  let r=`EOD – ${ds}\n\nTotal Dials: ${mt.dials||0}\nTalked To (excluding reschedules): ${mt.talked||0}\nRejected / Unqualified: ${mt.rejected||0}\n`;
-  if(state.leads.length){r+=`\nQualified Lead:\n`;state.leads.forEach(l=>{r+=`● ${l.name} – ${l.note}\n`;});}
-  if(mt.hw>0)r+=`\nHomework Sent: ${mt.hw}\n`;
-  const ap=profile.pipelines.filter(p=>!p.steps.every(s=>s.done));if(ap.length){r+=`\nPipeline:\n`;ap.forEach(p=>{const nx=p.steps.find(s=>!s.done);r+=`● ${p.name}${nx?' – '+nx.name:''}\n`;});}
-  const ot=[...gd.map(g=>g.text),...nd.map(n=>n.text)];if(ot.length){r+=`\nOther Tasks:\n`;ot.forEach(t=>{r+=`● ${t}\n`;});}
-  navigator.clipboard.writeText(r).then(()=>{const btn=document.querySelector('.eod-modal .btn-amber');if(btn){btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);}});}
+function copyEOD(){navigator.clipboard.writeText(buildEODText()).then(()=>{const btn=document.querySelector('.eod-modal .btn-amber');if(btn){btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);}});}
 document.getElementById('eodOverlay')?.addEventListener('click',function(e){if(e.target===this)closeEOD();});
 
 // ═══ BREAK TIMER ═══

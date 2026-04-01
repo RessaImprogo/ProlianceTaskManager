@@ -603,12 +603,11 @@ function buildEODText(){const ds=new Date().toLocaleDateString('en-US',{month:'s
   const allTasks=[...gd.map(g=>({text:g.text,cat:'Goals'})),...nd.map(n=>({text:n.text,cat:n.cat}))];
   if(allTasks.length){r+=`\nOther Tasks:\n`;const cats={};allTasks.forEach(t=>{if(!cats[t.cat])cats[t.cat]=[];cats[t.cat].push(t.text);});Object.entries(cats).forEach(([cat,tasks])=>{r+=`[${cat}]\n`;tasks.forEach(t=>{r+=`● ${t}\n`;});});}
   return r;}
-function showEOD(){const m=document.getElementById('eodModal');const txt=buildEODText();
-  let h=`<h2>EOD Report</h2><pre style="background:var(--bg);padding:14px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:.75rem;line-height:1.7;white-space:pre-wrap;border:1px solid var(--border-light);">${esc(txt)}</pre>`;
-  h+=`<div style="display:flex;gap:6px;margin-top:12px;"><button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-ghost" onclick="closeEOD()">Close</button></div>`;
-  m.innerHTML=h;document.getElementById('eodOverlay').classList.add('show');}
+function showEOD(){const m=document.getElementById('eodModal');_lastEODText=buildEODText();
+  m.innerHTML=`<h2>EOD Report</h2><pre style="background:var(--bg);padding:14px;border-radius:var(--radius-sm);font-family:inherit;font-size:.75rem;line-height:1.7;white-space:pre-wrap;border:1px solid var(--border-light);"></pre><div style="display:flex;gap:6px;margin-top:12px;"><button class="btn btn-amber" onclick="copyLastEOD()">📋 Copy</button><button class="btn btn-ghost" onclick="closeEOD()">Close</button></div>`;
+  m.querySelector('pre').textContent=_lastEODText;
+  document.getElementById('eodOverlay').classList.add('show');}
 function closeEOD(){document.getElementById('eodOverlay').classList.remove('show');}
-function copyEOD(){navigator.clipboard.writeText(buildEODText()).then(()=>{const btn=document.querySelector('.eod-modal .btn-amber');if(btn){btn.textContent='✅ Copied!';setTimeout(()=>btn.textContent='📋 Copy',2000);}});}
 document.getElementById('eodOverlay')?.addEventListener('click',function(e){if(e.target===this)closeEOD();});
 
 // ═══ BREAK TIMER ═══

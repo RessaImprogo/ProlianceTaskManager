@@ -503,8 +503,17 @@ function endDay(){if(!confirm('End your day? This archives today and gives a fre
   profile.archive.push({...state});if(profile.archive.length>60)profile.archive.shift();
   const m=state.metrics||{};if((m.dials||0)>profile.bestDials){profile.bestDials=m.dials;profile.bestDialsDate=state.date;}if((m.talked||0)>profile.bestTalked){profile.bestTalked=m.talked;profile.bestTalkedDate=state.date;}
   const td=(state.goals||[]).filter(g=>g.done).length+(state.notes||[]).filter(n=>n.done).length;if(td>profile.bestTasks){profile.bestTasks=td;profile.bestTasksDate=state.date;}
-  showEOD();state={date:'ENDED',goals:[],notes:[],wins:[],leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};save();
-  const em=document.getElementById('eodModal');const btns=em.querySelector('div:last-child');if(btns)btns.innerHTML=`<button class="btn btn-amber" onclick="copyEOD()">📋 Copy</button><button class="btn btn-fire" onclick="localStorage.removeItem('pdc7_state');location.reload();">🔄 Fresh Start</button>`;}
+  save();
+  // Build EOD text before resetting state
+  const eodText=buildEODText();
+  // Reset state but keep pipelines
+  const keepPipelines=state.pipelines||[];
+  state={date:'ENDED',goals:[],notes:[],wins:[],pipelines:keepPipelines,leads:[],metrics:{dials:0,talked:0,hw:0,rejected:0},lockedIn:false};
+  save();
+  // Show EOD modal with copy + fresh start
+  const modal=document.getElementById('eodModal');
+  modal.innerHTML=`<h2>EOD Report</h2><pre style="background:var(--bg);padding:14px;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:.75rem;line-height:1.7;white-space:pre-wrap;border:1px solid var(--border-light);">${esc(eodText)}</pre><div style="display:flex;gap:6px;margin-top:12px;"><button class="btn btn-amber" onclick="navigator.clipboard.writeText(\`${eodText.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`).then(()=>{this.textContent='✅ Copied!';setTimeout(()=>this.textContent='📋 Copy',2000);})">📋 Copy</button><button class="btn btn-fire" onclick="localStorage.removeItem('pdc7_state');location.reload();">🔄 Fresh Start</button></div>`;
+  document.getElementById('eodOverlay').classList.add('show');}
 
 // ═══ GOALS ═══
 function renderGoals(){const el=document.getElementById('goalsContainer'),tot=state.goals.length,dn=state.goals.filter(g=>g.done).length;document.getElementById('progressArc').setAttribute('stroke-dashoffset',tot?144.5-(144.5*dn/tot):144.5);document.getElementById('progressText').textContent=`${dn}/${tot}`;el.innerHTML=state.goals.map((g,i)=>`<div class="goal-item ${g.done?'completed':''}" id="goal-${i}" onclick="togGoal(${i})"><div class="goal-check ${g.done?'done':''}"></div><h3>${esc(g.text)}</h3></div>`).join('');}

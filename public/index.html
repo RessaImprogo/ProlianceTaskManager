@@ -152,6 +152,13 @@ textarea{resize:vertical;min-height:40px}
     </div>
   </div>
 
+  <!-- DAILY QUOTE -->
+  <div class="card" style="text-align:center;padding:20px 28px;margin-bottom:14px;background:linear-gradient(135deg,var(--surface),var(--bg2));border:1px solid var(--bl)">
+    <div style="font-size:1.4rem;color:var(--amber);margin-bottom:8px;font-family:'Playfair Display',serif">"</div>
+    <div id="quoteText" style="font-family:'Playfair Display',serif;font-size:1rem;font-weight:600;font-style:italic;color:var(--text);line-height:1.6;max-width:640px;margin:0 auto"></div>
+    <div id="quoteSrc" style="font-size:.65rem;color:var(--dim);margin-top:8px;font-weight:600;letter-spacing:.06em"></div>
+  </div>
+
   <!-- NAME -->
   <div id="scrName" class="card" style="display:none">
     <div style="text-align:center;padding:24px">
@@ -361,6 +368,7 @@ textarea{resize:vertical;min-height:40px}
   <button class="btn bo bs" id="bBtn">Take Break</button>
 </div>
 
+<script src="quotes.js"></script>
 <script>
 (function(){
 'use strict';
@@ -369,6 +377,11 @@ textarea{resize:vertical;min-height:40px}
 const $=id=>document.getElementById(id);
 const esc=s=>{const d=document.createElement('div');d.textContent=s;return d.innerHTML;};
 const TODAY=new Date().toDateString();
+
+];
+const dayIdx=Math.floor((Date.now()/864e5))%QUOTES.length;
+document.getElementById('quoteText').textContent=QUOTES[dayIdx].t;
+document.getElementById('quoteSrc').textContent=QUOTES[dayIdx].s;
 
 // ═══ DATA ═══
 const DEF_TAGS=[{n:'Pipeline',c:'#dc4425'},{n:'Interviews',c:'#2d8fd6'},{n:'Team',c:'#7c4deb'},{n:'Onboarding',c:'#1aab68'},{n:'Relationships',c:'#e8a020'},{n:'LinkedIn',c:'#0fa898'},{n:'Meetings',c:'#d94070'},{n:'Social',c:'#0fa898'},{n:'Admin',c:'#97918a'}];
